@@ -426,6 +426,17 @@ public class BinarySearchTreeTest {
 		Assert.assertTrue(expectedTraversal.equals(actualTraversal));
 	}
 	
+	@Test
+	public void shouldPerformPostOrderTraversal() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		final String expectedTraversal = "10" + "33" + "30" + "20" + "45" + "100" + "60" + "55" + "35";
+		final String actualTraversal = unit.postOrderTraversalNonRecursiveApproach();
+		
+		Assert.assertTrue(expectedTraversal.equals(actualTraversal));
+	}
+	
 	private void verifyNodesInLinkListForEachLevel(final List<List<Node>> listOfNodesAtEachLevel) {
 		for (int i = 0; i < unit.getNodesAtEachLevel().size(); i++) {
 			final List<Node> actualListOfNodes = unit.getNodesAtEachLevel().get(i);

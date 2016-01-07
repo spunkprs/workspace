@@ -16,6 +16,7 @@ public class BinarySearchTree {
 	private boolean rightElementPresent = false;
 	private boolean leftElementPresent = false;
 	private Node lcaForNodes = null;
+	private String postOrderTraversal = "";
 	
 	protected String levelOrderTraversalInSpiralForm() {
 		final StringBuilder sb = new StringBuilder();
@@ -27,6 +28,44 @@ public class BinarySearchTree {
 		return sb.toString();
 	}
 	
+	protected String postOrderTraversalNonRecursiveApproach() {
+		final ElementForTravesal<Node> elementForTravesal = new ElementForTravesal<Node>(root);
+		final StackForPostOrderTraversal<Node> stack = new StackForPostOrderTraversal<Node>();
+		stack.push(elementForTravesal);
+		processStackForPostOrderTraversal(stack);
+		return postOrderTraversal;
+	}
+	
+	private void processStackForPostOrderTraversal(final StackForPostOrderTraversal<Node> stack) {
+		ElementForTravesal<Node> head = stack.getHead();
+		while(head != null) {
+			decorateHead(head);
+			if (head.isLeftChildUnExplored()) {
+				ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getLeft());
+				stack.push(node);
+				head.setIsLeftChildUnExplored(!head.isLeftChildUnExplored());
+				head = stack.getHead();
+			} else if (head.isRightChildUnExplored()) {
+				ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getRight());
+				stack.push(node);
+				head.setIsRightChildUnExplored(!head.isRightChildUnExplored());
+				head = stack.getHead();
+			} else {
+				postOrderTraversal += String.valueOf(head.getElement().getElement());
+				head = stack.pop();
+			}
+		}
+	}
+
+	private void decorateHead(final ElementForTravesal<Node> head) {
+		if (!head.isNodeExplored()) {
+			final Node node = head.getElement();
+			head.setIsLeftChildUnExplored(node.getLeft() != null);
+			head.setIsRightChildUnExplored(node.getRight() != null);
+			head.setIsNodeExplored(!head.isNodeExplored());
+		}
+	}
+
 	private void performOperationsOnStacks(final Stack stackOne, final Stack stackTwo, final StringBuilder sb) {
 		flag = true;
 		while(flag) {
@@ -562,6 +601,79 @@ public Node findLowestCommonAncestorForTheNodes(final int leftElement, final int
 
 		public Element<Node> getHead() {
 			return head;
+		}
+	}
+	
+	private static class StackForPostOrderTraversal<T> {
+		
+		private ElementForTravesal<T> head;
+		
+		private void push(final ElementForTravesal element) {
+			if (head == null) {
+				head = element;
+			} else {
+				element.setNext(head);
+				head = element;
+			}
+		}
+		
+		private ElementForTravesal<T> getHead() {
+			return head;
+		}
+		
+		private ElementForTravesal<T> pop() {
+			if (head != null) {
+				head = head.getNext();
+			}
+			return head;
+		}
+	}
+	
+	private static class ElementForTravesal<T> {
+		private T element;
+		private ElementForTravesal<T> next;
+		private boolean isNodeExplored;
+		private boolean isLeftChildUnexplored;
+		private boolean isRightChildUnexplored;
+		
+		private ElementForTravesal(final T element) {
+			this.element = element;
+		}
+		
+		private void setNext(final ElementForTravesal<T> nextElement) {
+			this.next = nextElement;
+		}
+		
+		private ElementForTravesal<T> getNext() {
+			return this.next;
+		}
+		
+		private T getElement() {
+			return this.element;
+		}
+		
+		private void setIsLeftChildUnExplored(final boolean flag) {
+			this.isLeftChildUnexplored = flag;
+		}
+		
+		private void setIsRightChildUnExplored(final boolean flag) {
+			this.isRightChildUnexplored = flag;
+		}
+		
+		private boolean isLeftChildUnExplored() {
+			return this.isLeftChildUnexplored;
+		}
+		
+		private boolean isRightChildUnExplored() {
+			return this.isRightChildUnexplored;
+		}
+		
+		private boolean isNodeExplored() {
+			return this.isNodeExplored;
+		}
+		
+		private void setIsNodeExplored(final boolean isNodeExplored) {
+			this.isNodeExplored = isNodeExplored;
 		}
 	}
 	
