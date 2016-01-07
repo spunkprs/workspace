@@ -36,25 +36,61 @@ public class BinarySearchTree {
 		return postOrderTraversal;
 	}
 	
+	protected List<Integer> getAncestorsOfANodeWithoutRecursion(final int nodeValue) {
+		final ElementForTravesal<Node> elementForTravesal = new ElementForTravesal<Node>(root);
+		if (root.getElement() == nodeValue) {
+			return Lists.newArrayList();
+		} else {
+			final StackForPostOrderTraversal<Node> stack = new StackForPostOrderTraversal<Node>();
+			stack.push(elementForTravesal);
+			return processStackToFetchAncestors(stack, nodeValue);
+		}
+	}
+	
+	private List<Integer> processStackToFetchAncestors(final StackForPostOrderTraversal<Node> stack, final int nodeValue) {
+		final List<Integer> ancestors = Lists.newArrayList();
+		ElementForTravesal<Node> head = stack.getHead();
+		while(head != null && head.getElement().getElement() != nodeValue) {
+			head = processStack(head, stack);
+		}
+		populateAncestors(ancestors, stack);
+		return ancestors;
+	}
+
+	private void populateAncestors(final List<Integer> ancestors, final StackForPostOrderTraversal<Node> stack) {
+		ElementForTravesal<Node> head = stack.getHead();
+		if (head != null) {
+			while(head.getNext() != null) {
+				ancestors.add(head.getNext().element.getElement());
+				head = head.getNext();
+			}
+		}
+	}
+
 	private void processStackForPostOrderTraversal(final StackForPostOrderTraversal<Node> stack) {
 		ElementForTravesal<Node> head = stack.getHead();
 		while(head != null) {
-			decorateHead(head);
-			if (head.isLeftChildUnExplored()) {
-				ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getLeft());
-				stack.push(node);
-				head.setIsLeftChildUnExplored(!head.isLeftChildUnExplored());
-				head = stack.getHead();
-			} else if (head.isRightChildUnExplored()) {
-				ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getRight());
-				stack.push(node);
-				head.setIsRightChildUnExplored(!head.isRightChildUnExplored());
-				head = stack.getHead();
-			} else {
-				postOrderTraversal += String.valueOf(head.getElement().getElement());
-				head = stack.pop();
-			}
+			head = processStack(head, stack);
 		}
+	}
+	
+	private ElementForTravesal<Node> processStack(ElementForTravesal<Node> head, final StackForPostOrderTraversal<Node> stack) {
+		decorateHead(head);
+		if (head.isLeftChildUnExplored()) {
+			ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getLeft());
+			stack.push(node);
+			head.setIsLeftChildUnExplored(!head.isLeftChildUnExplored());
+			head = stack.getHead();
+		} else if (head.isRightChildUnExplored()) {
+			ElementForTravesal<Node> node = new ElementForTravesal<Node>(head.element.getRight());
+			stack.push(node);
+			head.setIsRightChildUnExplored(!head.isRightChildUnExplored());
+			head = stack.getHead();
+		} else {
+			postOrderTraversal += String.valueOf(head.getElement().getElement());
+			head = stack.pop();
+		}
+		return head;
 	}
 
 	private void decorateHead(final ElementForTravesal<Node> head) {

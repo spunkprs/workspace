@@ -437,6 +437,65 @@ public class BinarySearchTreeTest {
 		Assert.assertTrue(expectedTraversal.equals(actualTraversal));
 	}
 	
+	@Test
+	public void shouldGetAncestorsForANodeWhenNodeIsALeaf() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int element = 100;
+		final List<Integer> expectedListOfAncestors = Lists.newArrayList(60, 55, 35);
+		final List<Integer> actualListOfAncestors = unit.getAncestorsOfANodeWithoutRecursion(element);
+		
+		Assert.assertEquals(expectedListOfAncestors.size(), actualListOfAncestors.size());
+		verifyElements(expectedListOfAncestors, actualListOfAncestors);
+	}
+	
+	@Test
+	public void shouldGetAncestorsForANodeWhenNodeIsNotALeaf() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int element = 30;
+		final List<Integer> expectedListOfAncestors = Lists.newArrayList(20, 35);
+		final List<Integer> actualListOfAncestors = unit.getAncestorsOfANodeWithoutRecursion(element);
+		
+		Assert.assertEquals(expectedListOfAncestors.size(), actualListOfAncestors.size());
+		verifyElements(expectedListOfAncestors, actualListOfAncestors);
+	}
+	
+	
+	@Test
+	public void shouldGetAncestorsForANodeWhenNodeIsRoot() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int element = 35;
+		final List<Integer> expectedListOfAncestors = Lists.newArrayList();
+		final List<Integer> actualListOfAncestors = unit.getAncestorsOfANodeWithoutRecursion(element);
+		
+		Assert.assertEquals(expectedListOfAncestors.size(), actualListOfAncestors.size());
+		verifyElements(expectedListOfAncestors, actualListOfAncestors);
+	}
+	
+	@Test
+	public void shouldGetAncestorsForANodeWhenNodeIsNotPresentInTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int element = 101;
+		final List<Integer> expectedListOfAncestors = Lists.newArrayList();
+		final List<Integer> actualListOfAncestors = unit.getAncestorsOfANodeWithoutRecursion(element);
+		
+		Assert.assertEquals(expectedListOfAncestors.size(), actualListOfAncestors.size());
+		verifyElements(expectedListOfAncestors, actualListOfAncestors);
+	}
+	
+	private void verifyElements(final List<Integer> expectedListOfAncestors, final List<Integer> actualListOfAncestors) {
+		for (int i = 0; i < expectedListOfAncestors.size(); i++) {
+			Assert.assertEquals(expectedListOfAncestors.get(i), actualListOfAncestors.get(i));
+		}
+	}
+
 	private void verifyNodesInLinkListForEachLevel(final List<List<Node>> listOfNodesAtEachLevel) {
 		for (int i = 0; i < unit.getNodesAtEachLevel().size(); i++) {
 			final List<Node> actualListOfNodes = unit.getNodesAtEachLevel().get(i);
