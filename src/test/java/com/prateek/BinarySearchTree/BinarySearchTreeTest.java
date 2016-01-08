@@ -451,7 +451,7 @@ public class BinarySearchTreeTest {
 	}
 	
 	@Test
-	public void shouldGetAncestorsForANodeWhenNodeIsNotALeaf() {
+	public void shouldGetAncestorsForANodeWhenNodeIsNotALeafCaseOne() {
 		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
 		insertElementsInBST();
 		
@@ -488,6 +488,45 @@ public class BinarySearchTreeTest {
 		
 		Assert.assertEquals(expectedListOfAncestors.size(), actualListOfAncestors.size());
 		verifyElements(expectedListOfAncestors, actualListOfAncestors);
+	}
+	
+	@Test
+	public void shouldGetLeastCommonAncestorForNodesWhenBothNodesArePresentInDifferentSubTreesCaseOne() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int elementOne = 10;
+		int elementTwo = 33;
+		
+		final int expectedLeastCommonAncestor = 20;
+		final int leastCommonAncestor = unit.getLeastCommonAncestor(elementOne, elementTwo);
+		Assert.assertEquals(expectedLeastCommonAncestor, leastCommonAncestor);
+	}
+	
+	@Test
+	public void shouldGetLeastCommonAncestorForNodesWhenBothNodesArePresentInDifferentSubTreesCaseTwo() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int elementOne = 10;
+		int elementTwo = 60;
+		
+		final int expectedLeastCommonAncestor = 35;
+		final int leastCommonAncestor = unit.getLeastCommonAncestor(elementOne, elementTwo);
+		Assert.assertEquals(expectedLeastCommonAncestor, leastCommonAncestor);
+	}
+	
+	@Test
+	public void shouldGetLeastCommonAncestorForNodesWhenBothNodesArePresentInSameSubTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		int elementOne = 20;
+		int elementTwo = 33;
+		
+		final int expectedLeastCommonAncestor = 20;
+		final int leastCommonAncestor = unit.getLeastCommonAncestor(elementOne, elementTwo);
+		Assert.assertEquals(expectedLeastCommonAncestor, leastCommonAncestor);
 	}
 	
 	private void verifyElements(final List<Integer> expectedListOfAncestors, final List<Integer> actualListOfAncestors) {

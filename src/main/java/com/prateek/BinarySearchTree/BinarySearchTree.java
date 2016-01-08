@@ -2,8 +2,10 @@ package com.prateek.BinarySearchTree;
 
 import java.util.List;
 //Many questions that are need to be solved are still remaining but going with time I'll try to do most of them.
+import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class BinarySearchTree {
 	
@@ -28,6 +30,44 @@ public class BinarySearchTree {
 		return sb.toString();
 	}
 	
+	protected int getLeastCommonAncestor(final int nodeElementOne, final int nodeElementTwo) {
+		ElementForTravesal<Node> elementForTravesal = new ElementForTravesal<Node>(root);
+		final StackForPostOrderTraversal<Node> stack = new StackForPostOrderTraversal<Node>();
+		stack.push(elementForTravesal);
+		
+		final List<Integer> ancestorsForFirstNode = processStackToFetchAncestors(stack, nodeElementOne);
+		
+		stack.clearCache();
+		elementForTravesal = new ElementForTravesal<Node>(root);
+		stack.push(elementForTravesal);
+		
+		final List<Integer> ancestorsForSecondNode = processStackToFetchAncestors(stack, nodeElementTwo);
+		
+		if (nodeElementOne == root.getElement() || nodeElementTwo == root.getElement()) {
+			return root.getElement();
+		} else if (ancestorsForFirstNode.size() == 0 || ancestorsForSecondNode.size() == 0) {
+			return Integer.MIN_VALUE;
+		} else {
+			return processToFetchLeastCommonAncestor(ancestorsForFirstNode, ancestorsForSecondNode);
+		}
+	}
+	
+	private int processToFetchLeastCommonAncestor(final List<Integer> ancestorsForFirstNode, final List<Integer> ancestorsForSecondNode) {
+		int commonElement = Integer.MIN_VALUE;
+		final Set<Integer> set = Sets.newHashSet();
+		for (int i = 0; i < ancestorsForFirstNode.size(); i++) {
+			set.add(ancestorsForFirstNode.get(i));
+		}
+		
+		for (int i = 0; i < ancestorsForSecondNode.size(); i++) {
+			if (set.contains(ancestorsForSecondNode.get(i))) {
+				commonElement = ancestorsForSecondNode.get(i);
+				break;
+			}
+		}
+		return commonElement;
+	}
+
 	protected String postOrderTraversalNonRecursiveApproach() {
 		final ElementForTravesal<Node> elementForTravesal = new ElementForTravesal<Node>(root);
 		final StackForPostOrderTraversal<Node> stack = new StackForPostOrderTraversal<Node>();
@@ -43,7 +83,11 @@ public class BinarySearchTree {
 		} else {
 			final StackForPostOrderTraversal<Node> stack = new StackForPostOrderTraversal<Node>();
 			stack.push(elementForTravesal);
-			return processStackToFetchAncestors(stack, nodeValue);
+			final List<Integer> ancestors = processStackToFetchAncestors(stack, nodeValue);
+			if (!ancestors.isEmpty()) {
+				ancestors.remove(0);
+			}
+			return ancestors;
 		}
 	}
 	
@@ -60,8 +104,8 @@ public class BinarySearchTree {
 	private void populateAncestors(final List<Integer> ancestors, final StackForPostOrderTraversal<Node> stack) {
 		ElementForTravesal<Node> head = stack.getHead();
 		if (head != null) {
-			while(head.getNext() != null) {
-				ancestors.add(head.getNext().element.getElement());
+			while(head != null) {
+				ancestors.add(head.element.getElement());
 				head = head.getNext();
 			}
 		}
@@ -662,6 +706,10 @@ public Node findLowestCommonAncestorForTheNodes(final int leftElement, final int
 				head = head.getNext();
 			}
 			return head;
+		}
+		
+		private void clearCache() {
+			head = null;
 		}
 	}
 	
