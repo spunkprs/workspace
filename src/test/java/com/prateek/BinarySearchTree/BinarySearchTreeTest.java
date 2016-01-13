@@ -32,6 +32,7 @@ public class BinarySearchTreeTest {
 		elements.add(6);
 		elements.add(5);
 		elements.add(7);
+		
 		elements.add(110);
 	}
 	
