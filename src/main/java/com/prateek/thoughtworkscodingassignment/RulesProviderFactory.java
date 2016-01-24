@@ -22,7 +22,7 @@ public class RulesProviderFactory {
 		return rules;
 	}
 	
-	protected static void setRules() {
+	protected static void clearCache() {
 		final Map<Character, Integer> m = new HashMap<Character, Integer>();
 		final RuleOne ruleOne = RuleOne.getInstance();
 		ruleOne.setMap(m);

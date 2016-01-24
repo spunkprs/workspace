@@ -13,6 +13,7 @@ public class Parser {
 
 	private static boolean parse(final char[] arr) {
 		boolean flag = true;
+		RulesProviderFactory.clearCache();
 		for (int i = 0; i < arr.length; i++) {
 			 flag = validateRules(RulesProviderFactory.getRules(arr[i]), i, arr);
 			 if (!flag) {

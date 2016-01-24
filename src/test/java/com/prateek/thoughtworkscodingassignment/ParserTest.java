@@ -2,16 +2,10 @@ package com.prateek.thoughtworkscodingassignment;
 
 import org.junit.Assert;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ParserTest {
 	
-	@Before
-	public void setUp() {
-		RulesProviderFactory.setRules();
-	}
-
 	@Test
 	public void shouldReturnTrueWhenValidStringIsParsed() {
 		//Set Up
@@ -20,7 +14,6 @@ public class ParserTest {
 		
 		//Execute && Verify
 		Assert.assertTrue(Parser.parseText(textOne));
-		setUp();
 		Assert.assertTrue(Parser.parseText(textTwo));
 	}
 	
@@ -32,7 +25,6 @@ public class ParserTest {
 		
 		//Execute && Verify
 		Assert.assertFalse(Parser.parseText(textOne));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textTwo));
 	}
 	
@@ -73,9 +65,7 @@ public class ParserTest {
 		
 		//Execute && Verify
 		Assert.assertFalse(Parser.parseText(textOne));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textTwo));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textThree));
 	}
 	
@@ -90,13 +80,9 @@ public class ParserTest {
 		
 		//Execute && Verify
 		Assert.assertFalse(Parser.parseText(textOne));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textTwo));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textThree));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textFour));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textFive));
 	}
 	
@@ -109,9 +95,7 @@ public class ParserTest {
 		
 		//Execute && Verify
 		Assert.assertFalse(Parser.parseText(textOne));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textTwo));
-		setUp();
 		Assert.assertFalse(Parser.parseText(textThree));
 	}
 	
