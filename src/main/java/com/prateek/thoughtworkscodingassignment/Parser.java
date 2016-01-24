@@ -6,26 +6,23 @@ import java.util.List;
 
 public class Parser {
 
-	public boolean parseText(final String text) {
-		RulesProviderFactory.setRules();
+	public static boolean parseText(final String text) {
 		final char arr[] = text.toCharArray();
 		return parse(arr);
 	}
 
-	private boolean parse(final char[] arr) {
+	private static boolean parse(final char[] arr) {
 		boolean flag = true;
-		for (int i = 0; i < arr.length - 1; i++) {
+		for (int i = 0; i < arr.length; i++) {
 			 flag = validateRules(RulesProviderFactory.getRules(arr[i]), i, arr);
 			 if (!flag) {
 			 return flag;
 			}
 		}
-		
-		flag = validateRules(RulesProviderFactory.getRules(arr[arr.length - 1]), arr.length - 1, arr);
 		return flag;
 	}
 
-	private boolean validateRules(final List<Rule> rules, final int i, final char arr[]) {
+	private static boolean validateRules(final List<Rule> rules, final int i, final char arr[]) {
 		boolean flag = true;
 		for (Rule rule : rules) {
 			flag = rule.validate(i, arr);

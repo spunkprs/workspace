@@ -2,25 +2,17 @@ package com.prateek.thoughtworkscodingassignment;
 
 import org.junit.Assert;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ParseTextTest {
 
-	private ParseText parseText;
-	
-	@Before
-	public void setUp() {
-		parseText = new ParseText();
-	}
- 	
 	@Test(expected = RuntimeException.class)
 	public void shouldThrowExceptionForInvalidTextCaseOne() {
 		//Set Up
 		final String text = "XXXXLXI";
 		
 		//Execute && Verify
-		parseText.parse(text);
+		ParseText.parse(text);
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -29,7 +21,7 @@ public class ParseTextTest {
 		final String text = "XXM";
 		
 		//Execute && Verify
-		parseText.parse(text);
+		ParseText.parse(text);
 	}
 	
 	@Test
@@ -40,7 +32,7 @@ public class ParseTextTest {
 		
 		//Execute
 		try {
-			parseText.parse(text);
+			ParseText.parse(text);
 		} catch(RuntimeException e) {
 			counter++;
 		}

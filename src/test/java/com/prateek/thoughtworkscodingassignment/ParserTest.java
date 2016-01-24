@@ -7,13 +7,11 @@ import org.junit.Test;
 
 public class ParserTest {
 	
-	private Parser unit;
-
 	@Before
 	public void setUp() {
-		unit = new Parser();
+		RulesProviderFactory.setRules();
 	}
-	
+
 	@Test
 	public void shouldReturnTrueWhenValidStringIsParsed() {
 		//Set Up
@@ -21,8 +19,9 @@ public class ParserTest {
 		final String textTwo = "MMDXLIV";
 		
 		//Execute && Verify
-		Assert.assertTrue(unit.parseText(textOne));
-		Assert.assertTrue(unit.parseText(textTwo));
+		Assert.assertTrue(Parser.parseText(textOne));
+		setUp();
+		Assert.assertTrue(Parser.parseText(textTwo));
 	}
 	
 	@Test
@@ -32,8 +31,9 @@ public class ParserTest {
 		final String textTwo = "MXXXX";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(textOne));
-		Assert.assertFalse(unit.parseText(textTwo));
+		Assert.assertFalse(Parser.parseText(textOne));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textTwo));
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class ParserTest {
 		final String text = "MMXDI";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(text));
+		Assert.assertFalse(Parser.parseText(text));
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class ParserTest {
 		final String text = "MMID";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(text));
+		Assert.assertFalse(Parser.parseText(text));
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class ParserTest {
 		final String text = "X";
 		
 		//Execute && Verify
-		Assert.assertTrue(unit.parseText(text));
+		Assert.assertTrue(Parser.parseText(text));
 	}
 	
 	@Test
@@ -72,9 +72,11 @@ public class ParserTest {
 		
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(textOne));
-		Assert.assertFalse(unit.parseText(textTwo));
-		Assert.assertFalse(unit.parseText(textThree));
+		Assert.assertFalse(Parser.parseText(textOne));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textTwo));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textThree));
 	}
 	
 	@Test
@@ -87,11 +89,15 @@ public class ParserTest {
 		final String textFive = "MVM";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(textOne));
-		Assert.assertFalse(unit.parseText(textTwo));
-		Assert.assertFalse(unit.parseText(textThree));
-		Assert.assertFalse(unit.parseText(textFour));
-		Assert.assertFalse(unit.parseText(textFive));
+		Assert.assertFalse(Parser.parseText(textOne));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textTwo));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textThree));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textFour));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textFive));
 	}
 	
 	@Test
@@ -102,9 +108,11 @@ public class ParserTest {
 		final String textThree = "MLM";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(textOne));
-		Assert.assertFalse(unit.parseText(textTwo));
-		Assert.assertFalse(unit.parseText(textThree));
+		Assert.assertFalse(Parser.parseText(textOne));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textTwo));
+		setUp();
+		Assert.assertFalse(Parser.parseText(textThree));
 	}
 	
 	@Test
@@ -113,7 +121,7 @@ public class ParserTest {
 		final String textOne = "MDM";
 		
 		//Execute && Verify
-		Assert.assertFalse(unit.parseText(textOne));
+		Assert.assertFalse(Parser.parseText(textOne));
 	}
 	
 }
