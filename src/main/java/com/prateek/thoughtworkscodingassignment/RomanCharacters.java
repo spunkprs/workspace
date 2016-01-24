@@ -18,7 +18,8 @@ public enum RomanCharacters {
 	private String nameOfCharacter;
 	private int rankOfRomanCharacter;
 	private int valueOfRomanCharacter;
-	private static Map<String, Integer> map = prepareMap();
+	private static Map<String, Integer> characterToRankMap = prepareCharacterToRankMap();
+	private static Map<String, Integer> characterToValueMap = prepareCharacterToValueMap(); 
 	
 	private RomanCharacters(final String nameOfCharacter, final int rankOfRomanCharacter, final int valueOfRomanCharacter) {
 		this.nameOfCharacter = nameOfCharacter;
@@ -26,7 +27,15 @@ public enum RomanCharacters {
 		this.valueOfRomanCharacter = valueOfRomanCharacter;
 	}
 
-	private static Map<String, Integer> prepareMap() {
+	private static Map<String, Integer> prepareCharacterToValueMap() {
+		final Map<String, Integer> m = new HashMap<String, Integer>();
+		for (RomanCharacters r : values()) {
+			m.put(r.getNameOfCharacter(), r.getValueOfRomanCharacter());
+		}
+		return m;
+	}
+
+	private static Map<String, Integer> prepareCharacterToRankMap() {
 		final Map<String, Integer> m = new HashMap<String, Integer>();
 		for (RomanCharacters r : values()) {
 			m.put(r.getNameOfCharacter(), r.getRankOfRomanCharacter());
@@ -46,7 +55,12 @@ public enum RomanCharacters {
 		return valueOfRomanCharacter;
 	}
 	
-	public static Map<String, Integer> getMap() {
-		return map;
+	public static Map<String, Integer> getCharacterToRankMap() {
+		return characterToRankMap;
 	}
+
+	public static Map<String, Integer> getCharacterToValueMap() {
+		return characterToValueMap;
+	}
+	
 }
