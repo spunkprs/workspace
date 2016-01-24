@@ -9,15 +9,14 @@ import java.util.Map;
 
 public class RulesProviderFactory {
 	
-	public static List<Rule> getRules(final int i, final char arr[]) {
+	public static List<Rule> getRules(final char character) {
 		final List<Rule> rules = new ArrayList<Rule>();
 		final Map<Character, Integer> map = new HashMap<Character, Integer>();
-		if (arr[i] == 'I' || arr[i] == 'X' || arr[i] == 'C') {
+		if (character == 'I' || character == 'X' || character == 'C') {
 			rules.add(RuleOne.getInstance(map));
 			rules.add(RuleThree.getInstance());
-		} else if (arr[i] == 'D' || arr[i] == 'L' || arr[i] == 'V') {
+		} else if (character == 'D' || character == 'L' || character == 'V') {
 			rules.add(RuleTwo.getInstance(map));
-			rules.add(RuleThree.getInstance());
 		} else {
 			rules.add(RuleOne.getInstance(map));
 		}

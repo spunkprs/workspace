@@ -15,13 +15,13 @@ public class Parser {
 	private boolean parse(final char[] arr) {
 		boolean flag = true;
 		for (int i = 0; i < arr.length - 1; i++) {
-			 flag = validateRules(RulesProviderFactory.getRules(i, arr), i, arr);
+			 flag = validateRules(RulesProviderFactory.getRules(arr[i]), i, arr);
 			 if (!flag) {
 			 return flag;
 			}
 		}
 		
-		flag = validateRules(RulesProviderFactory.getRules(arr.length - 1, arr), arr.length - 1, arr);
+		flag = validateRules(RulesProviderFactory.getRules(arr[arr.length - 1]), arr.length - 1, arr);
 		return flag;
 	}
 

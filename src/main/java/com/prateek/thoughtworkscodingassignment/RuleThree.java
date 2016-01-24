@@ -3,12 +3,11 @@ package com.prateek.thoughtworkscodingassignment;
 import java.util.Map;
 import java.util.HashMap;
 
-/*This rule is applicable for characters 'I', 'X', 'C', 'V', 'L', 'D'*/
+/*This rule is applicable for characters 'I', 'X', 'C'*/
 
 public class RuleThree extends Rule {
 	
 	private static RuleThree ruleThree;
-	private Map<Character, Integer> map = prepareMap();
 	
 	public static RuleThree getInstance() {
 		if (null != ruleThree) {
@@ -16,14 +15,6 @@ public class RuleThree extends Rule {
 		}
 		ruleThree = new RuleThree();
 		return ruleThree;
-	}
-
-	private Map<Character, Integer> prepareMap() {
-		final Map<Character, Integer> map = new HashMap<Character, Integer>();
-		for (RomanCharacters rc : RomanCharacters.values()) {
-			map.put(rc.getNameOfCharacter().toCharArray()[0], rc.getRankOfRomanCharacter());
-		}
-		return map;
 	}
 
 	@Override
@@ -37,38 +28,33 @@ public class RuleThree extends Rule {
 	}
 
 	private boolean validateForElementsThatAreNotPresentAtEndOfArray(final int i, final char[] arr) {
-		int j = i + 1;
-		int rank1 = map.get(arr[i]);
-		int rank2 = map.get(arr[j]);
+		final Map<String, Integer> map = RomanCharacters.getMap();
+		
+		int rank1 = map.get(Character.toString(arr[i]));
+		int rank2 = map.get(Character.toString(arr[i + 1]));
 		
 		if (arr[i] == 'I') {
 			if (rank1 >= rank2) {
 				return true;
-			} else if (rank1 < rank2 && (rank2 == 2 || rank2 == 3)) {
+			} else if (rank1 < rank2 && (rank2 == RomanCharacters.V.getRankOfRomanCharacter() || rank2 == RomanCharacters.X.getRankOfRomanCharacter())) {
 				return true;
 			}
 			return false;
 		} else if (arr[i] == 'X') {
 			if (rank1 >= rank2) {
 				return true;
-			} else if (rank1 < rank2 && (rank2 == 4 || rank2 == 5)) {
+			} else if (rank1 < rank2 && (rank2 == RomanCharacters.L.getRankOfRomanCharacter() || rank2 == RomanCharacters.C.getRankOfRomanCharacter())) {
 				return true;
 			}
 			return false;
 		} else if (arr[i] == 'C') {
 			if (rank1 >= rank2) {
 				return true;
-			} else if (rank1 < rank2 && (rank2 == 6 || rank2 == 7)) {
+			} else if (rank1 < rank2 && (rank2 == RomanCharacters.D.getRankOfRomanCharacter() || rank2 == RomanCharacters.M.getRankOfRomanCharacter())) {
 				return true;
 			}
 			return false;
-		} else if(arr[i] == 'V' || arr[i] == 'L' || arr[i] == 'D') {
-			if (rank1 >= rank2) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		} 
 		return true;
 	}
 

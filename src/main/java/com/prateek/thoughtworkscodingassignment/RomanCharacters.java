@@ -1,5 +1,8 @@
 package com.prateek.thoughtworkscodingassignment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*Enum of Roman Characters with their ranks and values.*/
 
 public enum RomanCharacters {
@@ -9,16 +12,26 @@ public enum RomanCharacters {
 	L("L", 4, 50), 
 	C("C", 5, 100), 
 	D("D", 6, 500),
-	M("M", 7, 1000);
+	M("M", 7, 1000),
+	INVALID("", -1, -1);
 	
 	private String nameOfCharacter;
 	private int rankOfRomanCharacter;
 	private int valueOfRomanCharacter;
+	private static Map<String, Integer> map = prepareMap();
 	
 	private RomanCharacters(final String nameOfCharacter, final int rankOfRomanCharacter, final int valueOfRomanCharacter) {
 		this.nameOfCharacter = nameOfCharacter;
 		this.rankOfRomanCharacter = rankOfRomanCharacter;
 		this.valueOfRomanCharacter = valueOfRomanCharacter;
+	}
+
+	private static Map<String, Integer> prepareMap() {
+		final Map<String, Integer> m = new HashMap<String, Integer>();
+		for (RomanCharacters r : values()) {
+			m.put(r.getNameOfCharacter(), r.getRankOfRomanCharacter());
+		}
+		return m;
 	}
 
 	public String getNameOfCharacter() {
@@ -33,4 +46,7 @@ public enum RomanCharacters {
 		return valueOfRomanCharacter;
 	}
 	
+	public static Map<String, Integer> getMap() {
+		return map;
+	}
 }

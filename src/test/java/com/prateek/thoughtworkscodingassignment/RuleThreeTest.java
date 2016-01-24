@@ -1,14 +1,21 @@
 package com.prateek.thoughtworkscodingassignment;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class RuleThreeTest {
+	
+	private RuleThree rule;
+	
+	@Before
+	public void setUp() {
+		rule = RuleThree.getInstance();
+	}
 
 	@Test
 	public void inBiggerSymbolsIShouldBeFollowedByVAndXOnly() {
 		//Set Up
-		Rule rule = RuleThree.getInstance();
 		final char arr[] = {'I', 'V', 'X', 'I', 'X', 'I', 'M', 'I'};
 		
 		//Execute && Verify
@@ -21,7 +28,6 @@ public class RuleThreeTest {
 	@Test
 	public void inBiggerSymbolsXShouldBeFollowedByLAndCOnly() {
 		//Set Up
-		Rule rule = RuleThree.getInstance();
 		final char arr[] = {'X', 'L', 'C', 'X', 'C', 'X', 'D', 'X', 'M', 'X', 'V'};
 		
 		//Execute && Verify
@@ -35,7 +41,6 @@ public class RuleThreeTest {
 	@Test
 	public void inBiggerSymbolsCShouldBeFollowedByDAndMOnly() {
 		//Set Up
-		Rule rule = RuleThree.getInstance();
 		final char arr[] = {'C', 'D', 'M', 'C', 'M', 'C', 'I', 'C', 'X'};
 		
 		//Execute && Verify
@@ -43,41 +48,5 @@ public class RuleThreeTest {
 		Assert.assertTrue(rule.validate(3, arr));
 		Assert.assertTrue(rule.validate(5, arr));
 		Assert.assertTrue(rule.validate(7, arr));
-	}
-	
-	@Test
-	public void vShouldNotBeFollowedByAnyBiggerSymbolThanIt() {
-		//Set Up
-		Rule rule = RuleThree.getInstance();
-		final char arr1[] = {'V', 'D', 'I', 'X'};
-		final char arr2[] = {'V', 'I', 'I', 'X'};
-		
-		//Execute && Verify
-		Assert.assertFalse(rule.validate(0, arr1));
-		Assert.assertTrue(rule.validate(0, arr2));
-	}
-	
-	@Test
-	public void lShouldNotBeFollowedByAnyBiggerSymbolThanIt() {
-		//Set Up
-		Rule rule = RuleThree.getInstance();
-		final char arr1[] = {'L', 'D', 'I', 'X'};
-		final char arr2[] = {'L', 'V', 'I', 'X'};
-		
-		//Execute && Verify
-		Assert.assertFalse(rule.validate(0, arr1));
-		Assert.assertTrue(rule.validate(0, arr2));
-	}
-	
-	@Test
-	public void dShouldNotBeFollowedByAnyBiggerSymbolThanIt() {
-		//Set Up
-		Rule rule = RuleThree.getInstance();
-		final char arr1[] = {'D', 'M', 'I', 'X'};
-		final char arr2[] = {'D', 'C', 'I', 'X'};
-		
-		//Execute && Verify
-		Assert.assertFalse(rule.validate(0, arr1));
-		Assert.assertTrue(rule.validate(0, arr2));
 	}
 }

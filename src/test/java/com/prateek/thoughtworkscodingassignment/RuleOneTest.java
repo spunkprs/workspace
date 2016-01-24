@@ -1,19 +1,27 @@
 package com.prateek.thoughtworkscodingassignment;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.Map;
 import java.util.HashMap;
 
 public class RuleOneTest {
+	
+	private Map<Character, Integer> map;
+	private RuleOne rule;
+	
+	@Before
+	public void setUp() {
+		map = new HashMap<Character, Integer>();
+		rule = RuleOne.getInstance(map);
+		rule.setMap(new HashMap<Character, Integer>());
+	}
 
 	@Test
 	public void shouldReturnTrueWhenRepetitionNumberIsThreeOrLessThanThree() {
 		//Set Up
-		final Map<Character, Integer> map = new HashMap<Character, Integer>();
 		final char arr1[] = {'I', 'I', 'I', 'X', 'X', 'I'};
-		RuleOne rule = RuleOne.getInstance(map);
-		rule.setMap(new HashMap<Character, Integer>());
 		
 		//Execute && Verify
 		Assert.assertTrue(rule.validate(0, arr1));
@@ -27,10 +35,7 @@ public class RuleOneTest {
 	@Test
 	public void shouldReturnFalseWhenRepetitionNumberIsGreaterThanThree() {
 		//Set Up
-		final Map<Character, Integer> map = new HashMap<Character, Integer>();
 		final char arr[] = {'X', 'X', 'I', 'I', 'I', 'I'};
-		RuleOne rule = RuleOne.getInstance(map);
-		rule.setMap(new HashMap<Character, Integer>());
 		
 		//Execute && Verify
 		Assert.assertTrue(rule.validate(0, arr));

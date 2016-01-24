@@ -7,7 +7,6 @@ public class RaiseExceptionTest {
      RaiseException re = new RaiseException();
      System.out.println(re.getCaughtException());
      System.out.println(re.isExceptionThrownInsideConstructor());
-     
 	}
 
 }

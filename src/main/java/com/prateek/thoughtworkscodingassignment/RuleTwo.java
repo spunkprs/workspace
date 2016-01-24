@@ -31,30 +31,29 @@ public class RuleTwo extends Rule {
 	
 	private boolean validateForElementPresentAtEndOfArray(final int i, final char[] arr) {
 		Integer count = map.get(arr[i]);
-		if (i == 0 && i == arr.length - 1) {
-			return true;
-		} else if (null != count) {
+		if (count != null) {
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private boolean validateForElementsNotPresentAtEndOfArray(final int i, final char[] arr) {
-		int j = i + 1;
 		Integer count = map.get(arr[i]);
 		
 		if (null != count) {
 		return false;
-		} else if (count == null && arr[i] == arr[j] && j == arr.length - 1) {
-			return false;
+		} else {
+			map.put(arr[i], 1);
+			return !isFollowedByCharacterWithGreaterRank(arr[i], arr[i + 1]);
 		}
-		map.put(arr[i], 1);
-		return true;
+	}
+	
+	private boolean isFollowedByCharacterWithGreaterRank(final char firstCharacter, final char secondCharacter) {
+		final Map<String, Integer> m = RomanCharacters.getMap();
+		return m.get(Character.toString(firstCharacter)) < m.get(Character.toString(secondCharacter)) ? true : false;
 	}
 
 	protected void setMap(final Map<Character, Integer> m) {
 		this.map = m;
 	}
-
 }
