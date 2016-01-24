@@ -28,7 +28,7 @@ public class RuleThree extends Rule {
 	}
 
 	private boolean validateForElementsThatAreNotPresentAtEndOfArray(final int i, final char[] arr) {
-		final Map<String, Integer> map = RomanCharacters.getMap();
+		final Map<String, Integer> map = RomanCharacters.getCharacterToRankMap();
 		
 		int rank1 = map.get(Character.toString(arr[i]));
 		int rank2 = map.get(Character.toString(arr[i + 1]));

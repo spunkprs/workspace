@@ -1,10 +1,10 @@
 package com.prateek.thoughtworkscodingassignment;
 
+import java.util.HashMap;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Map;
-import java.util.HashMap;
 
 public class RuleOneTest {
 	

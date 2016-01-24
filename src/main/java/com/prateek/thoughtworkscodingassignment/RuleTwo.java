@@ -50,7 +50,7 @@ public class RuleTwo extends Rule {
 	}
 	
 	private boolean isFollowedByCharacterWithGreaterRank(final char firstCharacter, final char secondCharacter) {
-		final Map<String, Integer> m = RomanCharacters.getMap();
+		final Map<String, Integer> m = RomanCharacters.getCharacterToRankMap();
 		return m.get(Character.toString(firstCharacter)) < m.get(Character.toString(secondCharacter)) ? true : false;
 	}
 
