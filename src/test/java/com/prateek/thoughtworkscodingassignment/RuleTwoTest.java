@@ -10,13 +10,11 @@ import org.junit.Before;
 public class RuleTwoTest {
 	
 	private RuleTwo rule;
-	private Map<Character, Integer> map;
 	
 	@Before
 	public void setUp() {
-		map = new HashMap<Character, Integer>();
-		rule = RuleTwo.getInstance(map);
-		rule.setMap(map);
+		rule = RuleTwo.getInstance();
+		rule.setMap(new HashMap<Character, Integer>());
 	}
 	
 	@Test

@@ -8,13 +8,11 @@ import java.util.HashMap;
 
 public class RuleOneTest {
 	
-	private Map<Character, Integer> map;
 	private RuleOne rule;
 	
 	@Before
 	public void setUp() {
-		map = new HashMap<Character, Integer>();
-		rule = RuleOne.getInstance(map);
+		rule = RuleOne.getInstance();
 		rule.setMap(new HashMap<Character, Integer>());
 	}
 
@@ -44,5 +42,14 @@ public class RuleOneTest {
 		Assert.assertTrue(rule.validate(3, arr));
 		Assert.assertTrue(rule.validate(4, arr));
 		Assert.assertFalse(rule.validate(5, arr));
+	}
+	
+	@Test
+	public void shouldProcessWhenSizeOfTextIsOne() {
+		//Set Up
+		final char arr[] = {'X'};
+		
+		//Execute && Verify
+		Assert.assertTrue(rule.validate(0, arr));
 	}
 }

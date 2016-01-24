@@ -1,24 +1,25 @@
 package com.prateek.thoughtworkscodingassignment;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /*This rule is applicable to characters 'I', 'X', 'C', 'M'*/
 
 public class RuleOne extends Rule {
 	
-	private Map<Character, Integer> map;
+	private Map<Character, Integer> map = new HashMap<Character, Integer>();
 	private static RuleOne ruleOne;
 	private static final int MAX_COUNT_OF_REPETITION_OF_CHARACTER = 3;
 	
-	public RuleOne(final Map<Character, Integer> map) {
-		this.map = map;
+	private RuleOne() {
+		
 	}
-
-	public static RuleOne getInstance(final Map<Character, Integer> map) {
+	
+	public static RuleOne getInstance() {
 		if (null != ruleOne) {
 			return ruleOne;
 		}
-		ruleOne = new RuleOne(map);
+		ruleOne = new RuleOne();
 		return ruleOne;
 	}
 

@@ -1,23 +1,24 @@
 package com.prateek.thoughtworkscodingassignment;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /*This rule is applicable to characters 'D', 'L', 'V'*/
 
 public class RuleTwo extends Rule {
 	
-	private Map<Character, Integer> map;
+	private Map<Character, Integer> map = new HashMap<Character, Integer>();
 	private static RuleTwo ruleTwo;
 	
-	private RuleTwo(final Map<Character, Integer> m) {
-		this.map = m;
+	private RuleTwo() {
+		
 	}
 	
-	public static RuleTwo getInstance(final Map<Character, Integer> m) {
+	public static RuleTwo getInstance() {
 		if (null != ruleTwo) {
 			return ruleTwo;
 		} 
-		ruleTwo = new RuleTwo(m);
+		ruleTwo = new RuleTwo();
 		return ruleTwo;
 	}
 

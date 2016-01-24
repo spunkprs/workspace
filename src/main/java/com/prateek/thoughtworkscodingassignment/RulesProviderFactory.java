@@ -11,24 +11,23 @@ public class RulesProviderFactory {
 	
 	public static List<Rule> getRules(final char character) {
 		final List<Rule> rules = new ArrayList<Rule>();
-		final Map<Character, Integer> map = new HashMap<Character, Integer>();
 		if (character == 'I' || character == 'X' || character == 'C') {
-			rules.add(RuleOne.getInstance(map));
+			rules.add(RuleOne.getInstance());
 			rules.add(RuleThree.getInstance());
 		} else if (character == 'D' || character == 'L' || character == 'V') {
-			rules.add(RuleTwo.getInstance(map));
+			rules.add(RuleTwo.getInstance());
 		} else {
-			rules.add(RuleOne.getInstance(map));
+			rules.add(RuleOne.getInstance());
 		}
 		return rules;
 	}
 	
 	protected static void setRules() {
 		final Map<Character, Integer> m = new HashMap<Character, Integer>();
-		final RuleOne ruleOne = RuleOne.getInstance(m);
+		final RuleOne ruleOne = RuleOne.getInstance();
 		ruleOne.setMap(m);
 		
-		final RuleTwo ruleTwo = RuleTwo.getInstance(m);
+		final RuleTwo ruleTwo = RuleTwo.getInstance();
 		ruleTwo.setMap(m);
 	}
 }
