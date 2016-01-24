@@ -14,7 +14,6 @@ public class ProcessQueries {
 	private static final String HOW_MUCH = "how" + " " +"much";
 	private static final String HOW_MANY = "how" + " " +"many";
 	private static final String CREDITS = "Credits";
-	private Computor computor;
 	private String element = null;
 	private Writer writer;
 	
@@ -48,7 +47,6 @@ public class ProcessQueries {
 	}
 
 	private void injectDependencies() {
-		computor = new Computor();
 		writer = new Writer();
 	}
 
@@ -62,7 +60,7 @@ public class ProcessQueries {
 	private String parseAndCompute(final String text) {
 		try {
 			ParseText.parse(text);
-			return String.valueOf(computor.computeUnits(text.toCharArray()));
+			return String.valueOf(Computor.computeUnits(text.toCharArray()));
 		} catch(RuntimeException e) {
 			throw e;
 		}
