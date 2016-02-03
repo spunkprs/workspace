@@ -3,6 +3,11 @@ package com.prateek.thoughtworkscodingassignment;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/*
+ * Contains word to roman character map &&
+ * element to its worth map
+ * */
 public abstract class FileProcessor {
 
 	private static Map<String, String> wordToRomanCharacterMap = new HashMap<String, String>();
