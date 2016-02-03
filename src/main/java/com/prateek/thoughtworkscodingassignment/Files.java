@@ -5,8 +5,7 @@ package com.prateek.thoughtworkscodingassignment;
 public enum Files {
 
 	INPUT("InputFile.txt"),
-	OUTPUT("GeneratedOutput.txt"), 
-	EMPTY("EmptyFile.txt");
+	OUTPUT("GeneratedOutput.txt"); 
 	
 	private String fileName;
 	

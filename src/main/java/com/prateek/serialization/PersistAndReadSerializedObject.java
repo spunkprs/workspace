@@ -20,7 +20,6 @@ public class PersistAndReadSerializedObject {
 	}
 	
 private static void writeSerialObjectToFile() {
-		
 		serialObjectOne = new Man("SPUNK", "ABCD", "BROWN");
         FileOutputStream fos = null;
         ObjectOutputStream out = null;

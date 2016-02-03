@@ -13,7 +13,7 @@ public enum RomanCharacters {
 	C("C", 5, 100), 
 	D("D", 6, 500),
 	M("M", 7, 1000),
-	INVALID("", -1, -1);
+	INVALID("Z", -1, -1);
 	
 	private String nameOfCharacter;
 	private int rankOfRomanCharacter;

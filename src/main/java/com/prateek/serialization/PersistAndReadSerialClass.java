@@ -57,7 +57,6 @@ public class PersistAndReadSerialClass {
 	}
 
 	private static void writeSerialObjectToFile() {
-		
 		serialObjectOne = new SerialClass("CHILD");
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
