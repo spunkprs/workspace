@@ -65,7 +65,8 @@ public class FileProcessorSectionThree extends FileProcessor {
 		try {
 			ParseText.parse(text);
 			return String.valueOf(Computor.computeUnits(text.toCharArray()));
-		} catch(RuntimeException e) {
+		} catch(final RuntimeException e) {
+			writer.write(UNMAPPED_WORD_MESSAGE);
 			throw e;
 		}
 	}

@@ -29,28 +29,28 @@ public class OutputWriter extends Writer {
 				bw = getInstanceOfBufferedWriter();
 				bw.write(message);
 				bw.newLine();
-				closeStream();
-			} catch(IOException e) {
+				cleanUp();
+			} catch(final IOException e) {
 				e.printStackTrace();
 			}
-		} 
-		
+		}
+	
 	private BufferedWriter getInstanceOfBufferedWriter() {
-		if (null != bw) {
-			return bw;
-		} else {
+		//if (null != bw) {
+			//return bw;
+		//} else {
 			try {
 				File file = new File(Files.OUTPUT.getFileName());
-				bw = new BufferedWriter(new FileWriter(file));
-			} catch(IOException e) {
+				bw = new BufferedWriter(new FileWriter(file, true));
+			} catch(final IOException e) {
+				//Log Exception
 			}
 			return bw;
-		}
+		//}
 	}
 	
-	private void closeStream() {
+	private void cleanUp() {
 		try {
-			bw = getInstanceOfBufferedWriter();
 			bw.close();
 		} catch(IOException e) {
 		}

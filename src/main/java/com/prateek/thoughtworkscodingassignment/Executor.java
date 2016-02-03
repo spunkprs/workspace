@@ -5,24 +5,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 /*Execution starts from here.
  * It reads input statements from file. 
  * */
 
 public class Executor {
 
-	public void execute() {
+	private IFileProcessorDelegator fileProcessorDelegator;
+	
+	public Executor(final IFileProcessorDelegator fileProcessorDelegator) {
+		this.fileProcessorDelegator = fileProcessorDelegator;
+	}
+	
+	public void execute(final String fileName) {
 		try {
-			final BufferedReader br = new BufferedReader(new FileReader(Files.INPUT.getFileName()));
+			final BufferedReader br = new BufferedReader(new FileReader(fileName));
 			process(br);
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void process(final BufferedReader br) {
-		final FileProcessorDelegator fileProcessorDelegator = FileProcessorDelegator.getInstance();
+	void process(final BufferedReader br) {
 		try {
 			String line = br.readLine();
 			while(line != null) {

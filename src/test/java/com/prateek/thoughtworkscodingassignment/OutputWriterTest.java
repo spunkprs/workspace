@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.AfterClass;
 import org.junit.Assert;
 
 public class OutputWriterTest {
@@ -19,7 +19,7 @@ public class OutputWriterTest {
 	
 	@Before
 	public void setUp() {
-		writer = new OutputWriter();
+		writer = OutputWriter.getInstance();
 		clearFileContents();
 	}
 	
@@ -35,8 +35,18 @@ public class OutputWriterTest {
 	}
 
 	@Test
-	public void shouldWriteMessageToFile() {
-		final String expectedMessage = "Hello Prateek";
+	public void shouldWriteMessageToFileCaseOne() {
+		final String expectedMessage = "Printing first time";
+		writer.write(expectedMessage);
+		
+		final String actualMessage = readFromFile();
+		
+		Assert.assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	@Test
+	public void shouldWriteMessageToFileCaseTwo() {
+		final String expectedMessage = "Printing second time";
 		writer.write(expectedMessage);
 		
 		final String actualMessage = readFromFile();

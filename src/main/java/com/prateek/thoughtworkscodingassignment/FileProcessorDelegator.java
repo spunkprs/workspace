@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 /*Responsible for providing the suitable FileProcessor. 
  * */
-public class FileProcessorDelegator {
+public class FileProcessorDelegator implements IFileProcessorDelegator{
 
 	private static final String space = " ";
 	private static final String HOW = "how";
@@ -29,7 +29,7 @@ public class FileProcessorDelegator {
 		}
 	}
 	
-	protected void delegate(final String line) {
+	public void delegate(final String line) {
 		try {
 			if (checkForPresenceOfRomanCharacter(line)) {
 				processors.get(0).parseAndProcess(line);
