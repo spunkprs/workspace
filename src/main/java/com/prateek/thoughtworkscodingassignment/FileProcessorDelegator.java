@@ -12,12 +12,16 @@ public class FileProcessorDelegator implements IFileProcessorDelegator{
 	
 	private List<FileProcessor> processors;
 	private static FileProcessorDelegator fileProcessorDelegator;
+	private Writer writer;
+	
+	private static final String UNMAPPED_WORD_MESSAGE = "I have no idea what you are talking about";
 	
 	private FileProcessorDelegator() {
+		writer = OutputWriter.getInstance();
 		processors = new ArrayList<FileProcessor>();
 		processors.add(new FileProcessorSectionOne());
 		processors.add(new FileProcessorSectionTwo());
-		processors.add(new FileProcessorSectionThree());
+		processors.add(new FileProcessorSectionThree(writer));
 	}
 	
 	protected static FileProcessorDelegator getInstance() {
@@ -38,7 +42,7 @@ public class FileProcessorDelegator implements IFileProcessorDelegator{
 			} else if (line.contains(HOW)) {
 				processors.get(2).parseAndProcess(line);
 			} else {
-				
+				writer.write(UNMAPPED_WORD_MESSAGE);
 			}
 		} catch(final Exception e) {
 			//Can log error messages here

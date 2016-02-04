@@ -22,9 +22,9 @@ public class FileProcessorSectionThree extends FileProcessor {
 	
 	private Writer writer;
 	
-	protected FileProcessorSectionThree() {
+	protected FileProcessorSectionThree(final Writer writer) {
 		super();
-		writer = OutputWriter.getInstance();
+		this.writer = writer;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class FileProcessorSectionThreeTest {
 	
 	@Before
 	public void setUp() {
-		fileProcessor = new FileProcessorSectionThree();
+		fileProcessor = new FileProcessorSectionThree(OutputWriter.getInstance());
 		prepareWordToCharacterMap();
 		prepareElementToEvaluationMap();
 	}
