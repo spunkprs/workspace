@@ -14,7 +14,7 @@ public class RuleTwo extends Rule {
 		
 	}
 	
-	public static RuleTwo getInstance() {
+	protected static RuleTwo getInstance() {
 		if (null != ruleTwo) {
 			return ruleTwo;
 		} 
@@ -23,7 +23,7 @@ public class RuleTwo extends Rule {
 	}
 
 	@Override
-	public boolean validate(final int i, final char[] arr) {
+	protected boolean validate(final int i, final char[] arr) {
 		if (i < arr.length - 1) {
 			return validateForElementsNotPresentAtEndOfArray(i, arr);
 		}

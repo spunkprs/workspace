@@ -9,7 +9,7 @@ public class RuleThree extends Rule {
 	
 	private static RuleThree ruleThree;
 	
-	public static RuleThree getInstance() {
+	protected static RuleThree getInstance() {
 		if (null != ruleThree) {
 			return ruleThree;
 		}
@@ -18,7 +18,7 @@ public class RuleThree extends Rule {
 	}
 
 	@Override
-	public boolean validate(int i, char[] arr) {
+	protected boolean validate(int i, char[] arr) {
 		if (i == 0 && i == arr.length - 1) {
 			return true;
 		} else if (i < arr.length - 1) {

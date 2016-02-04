@@ -11,7 +11,7 @@ public class Computor {
 	private static int jump = 0;
 	private static boolean flag = false;
 
-	public static int computeUnits(final char[] arr) {
+	protected static int computeUnits(final char[] arr) {
 		int computedValue = 0;
 		flag = false;
 		for (int i = 0; i < arr.length - 1; i++) {

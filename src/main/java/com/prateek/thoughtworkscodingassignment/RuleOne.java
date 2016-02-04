@@ -15,7 +15,7 @@ public class RuleOne extends Rule {
 		
 	}
 	
-	public static RuleOne getInstance() {
+	protected static RuleOne getInstance() {
 		if (null != ruleOne) {
 			return ruleOne;
 		}
@@ -24,7 +24,7 @@ public class RuleOne extends Rule {
 	}
 
 	@Override
-	public boolean validate(final int i, final char[] arr) {
+	protected boolean validate(final int i, final char[] arr) {
 		final Integer count = map.get(arr[i]);
 		if (count != null) {
 			if ((arr[i] == arr[i - 1]) && count == MAX_COUNT_OF_REPETITION_OF_CHARACTER) {

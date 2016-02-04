@@ -4,5 +4,5 @@ package com.prateek.thoughtworkscodingassignment;
 
 public abstract class Rule {
 
-	public abstract boolean validate(final int i, final char arr[]);
+	protected abstract boolean validate(final int i, final char arr[]);
 }
