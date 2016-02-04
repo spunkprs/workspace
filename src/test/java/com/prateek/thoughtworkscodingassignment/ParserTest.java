@@ -1,10 +1,15 @@
 package com.prateek.thoughtworkscodingassignment;
 
 import org.junit.Assert;
-
+import org.junit.Before;
 import org.junit.Test;
 
 public class ParserTest {
+	
+	@Before
+	public void setUp() {
+		RulesProviderFactory.clearCache();
+	}
 	
 	@Test
 	public void shouldReturnTrueWhenValidStringIsParsed() {

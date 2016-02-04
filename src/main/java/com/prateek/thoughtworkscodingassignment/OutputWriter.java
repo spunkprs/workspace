@@ -36,9 +36,6 @@ public class OutputWriter extends Writer {
 		}
 	
 	private BufferedWriter getInstanceOfBufferedWriter() {
-		//if (null != bw) {
-			//return bw;
-		//} else {
 			try {
 				File file = new File(Files.OUTPUT.getFileName());
 				bw = new BufferedWriter(new FileWriter(file, true));
@@ -46,7 +43,6 @@ public class OutputWriter extends Writer {
 				//Log Exception
 			}
 			return bw;
-		//}
 	}
 	
 	private void cleanUp() {

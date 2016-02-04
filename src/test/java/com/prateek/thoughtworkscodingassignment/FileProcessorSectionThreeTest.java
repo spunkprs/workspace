@@ -55,13 +55,11 @@ public class FileProcessorSectionThreeTest {
 		Assert.assertTrue(expectedOutput.equals(FileProcessorSectionThree.output));
 	}
 	
-	@Test
-	public void shouldParseAndProcessCaseTwo() {
+	@Test(expected = RuntimeException.class)
+	public void shouldThrowExceptionWhenMappedWordsDoesNotAbideWithTheRules() {
 		final String query = "how much is glob tegj ?";
-		final String expectedOutput = "glob tegj ";
 		
 		fileProcessor.parseAndProcess(query);
-		Assert.assertTrue(expectedOutput.equals(FileProcessorSectionThree.output));
 	}
 	
 	@Test(expected = RuntimeException.class)

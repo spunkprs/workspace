@@ -33,12 +33,12 @@ public class ExecutorTest {
 
 	@Test
 	public void shouldDelegateLineProcessingToDelegator() {
-		BufferedReader br = new BufferedReader(new StringReader("asadas\nasasda\nfsfsf"));
+		BufferedReader br = new BufferedReader(new StringReader("abcd\nefgh\nijk"));
 		executor.process(br);
 		Assert.assertEquals(3, fileProcessorDelegator.getLineCount());
-		Assert.assertEquals("asadas", fileProcessorDelegator.getLine(0));
-		Assert.assertEquals("asasda", fileProcessorDelegator.getLine(1));
-		Assert.assertEquals("fsfsf", fileProcessorDelegator.getLine(2));
+		Assert.assertEquals("abcd", fileProcessorDelegator.getLine(0));
+		Assert.assertEquals("efgh", fileProcessorDelegator.getLine(1));
+		Assert.assertEquals("ijk", fileProcessorDelegator.getLine(2));
 	}
 	
 	private static class MockFileProcessorDelegator implements IFileProcessorDelegator {
