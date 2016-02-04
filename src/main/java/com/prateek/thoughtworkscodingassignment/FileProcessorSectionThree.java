@@ -82,7 +82,7 @@ public class FileProcessorSectionThree extends FileProcessor {
 		
 		for (String word : words) {
 			if (word.length() >=1 ) {
-				word = word.replace(" ", "");
+				word = word.trim();
 				String ch = wordToRomanCharacterMap.get(word);
 				if (null != ch) {
 					queryWord += ch;
