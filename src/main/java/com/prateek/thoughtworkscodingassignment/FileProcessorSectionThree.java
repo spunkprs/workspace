@@ -2,7 +2,8 @@ package com.prateek.thoughtworkscodingassignment;
 
 import java.util.Map;
 
-/*Responsible for finding the answers for every asked query.If the asked Roman text does not abide the rules or the query is regarding any unmapped element it will be throwing exception, 
+/*Responsible for finding the answers for every asked query.If the asked Roman text does not abide the rules or the query is regarding any unmapped element it will be 
+ * throwing exception followed by writing message to the file, 
  * if any unmapped word comes into picture exception will be thrown along with writing message to file, if everything goes fine 
  * calculated output would be written to file.
  * */
@@ -15,6 +16,7 @@ public class FileProcessorSectionThree extends FileProcessor {
 	private static final String CREDITS = "Credits";
 	private static final String IS = "is";
 	private static final String UNMAPPED_WORD_MESSAGE = "I have no idea what you are talking about";
+	private static final String UNMAPPED_ELEMENT_MESSAGE = "Credits can not be computed for Unmapped element";
 	
 	protected static String output = "";
 	
@@ -58,7 +60,7 @@ public class FileProcessorSectionThree extends FileProcessor {
 				return elementName;
 			}
 		}
-		throw new RuntimeException("Credits can not be computed for Unmapped element");
+		throw new RuntimeException(UNMAPPED_ELEMENT_MESSAGE);
 	}
 
 	private String parseAndCompute(final String text) {
