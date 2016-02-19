@@ -1,10 +1,8 @@
 package com.prateek.exceptionhandling;
 
-import java.io.IOException;
-
 public class Child extends Parent {
 
-public void method() throws IOException {
+public void method() throws RuntimeException {
 	//super.method();
 	System.out.println("In Child Class");
 }
