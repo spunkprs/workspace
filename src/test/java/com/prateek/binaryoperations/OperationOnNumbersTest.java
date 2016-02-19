@@ -97,7 +97,7 @@ public class OperationOnNumbersTest {
 	@Test
 	public void shouldConvertDecimalToBinaryFormat() {
 		//Set 
-		final int number = 32;
+		final int number = 11;
 		final int binaryFormat[] = OperationsOnNumbersWithoutArithmeticOperators.convertDecimalToBinaryWithoutUsingModuloOperator(number);
 		for (int i = 0; i < binaryFormat.length; i++) {
 			System.out.print(binaryFormat[i]);
