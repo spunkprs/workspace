@@ -14,10 +14,24 @@ public class HeapSortTest {
 	}
 	
 	@Test
-	public void shouldSort() {
+	public void shouldSortCaseOne() {
 		//Set Up
 		final int arr[] = {9, 7, 18, 2, 1, 22, 100, 2};
 		final int expectedArray[] = {1, 2, 2, 7, 9, 18, 22, 100};
+		
+		//Execute
+		final int actualArray[] = unit.sort(arr);
+		
+		//Verify
+		Assert.assertEquals(expectedArray.length, actualArray.length);
+		verify(expectedArray, actualArray);
+	}
+	
+	@Test
+	public void shouldSortCaseTwo() {
+		//Set Up
+		final int arr[] = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
+		final int expectedArray[] = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2};
 		
 		//Execute
 		final int actualArray[] = unit.sort(arr);
