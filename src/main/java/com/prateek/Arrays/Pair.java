@@ -11,14 +11,20 @@ public class Pair {
 		this.second = second;
 	}
 	
-	
+	public void setFirst(int first) {
+		this.first = first;
+	}
+
+	public void setSecond(int second) {
+		this.second = second;
+	}
+
 	public int getFirst() {
 		return first;
 	}
 	public int getSecond() {
 		return second;
 	}
-	
 	
 	@Override
 	public int hashCode() {
