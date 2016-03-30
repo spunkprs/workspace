@@ -2,7 +2,6 @@ package com.prateek.innerclassconceptsbrushup;
 
 public class Test {
 
-	
 	public static void main(String[] args) {
 		
      OuterClass.StaticInnerClass staticInnerClass = new OuterClass.StaticInnerClass("staticInnerClassMessage");
