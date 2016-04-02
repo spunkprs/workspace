@@ -24,6 +24,7 @@ public class Test {
 class OuterClass {
 	
 	private String outerClassMessage;
+	private static String outerClassLevelMessage;
 	OuterClass(final String message) {
 		this.outerClassMessage = message;
 	}
@@ -45,10 +46,9 @@ class OuterClass {
 		
 		class InnerOne {
 			public void display() {
-				System.out.println(staticInnerClassMessage);
+				System.out.println(staticInnerClassMessage + outerClassLevelMessage);
 			}
 		}
-		
 	}
 	
 	class InnerClass {
@@ -63,6 +63,12 @@ class OuterClass {
 		
 		public void displayAppendedMessage() {
 			System.out.println(outerClassMessage + " " + innerClassMessage);
+		}
+		
+		class InnerTwo {
+			public void display() {
+				System.out.println(innerClassMessage + outerClassMessage + outerClassLevelMessage);
+			}
 		}
 	}
 }

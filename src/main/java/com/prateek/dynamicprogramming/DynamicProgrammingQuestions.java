@@ -18,6 +18,7 @@ public class DynamicProgrammingQuestions {
 	private Map<Pair<Integer, Integer>, Pair<Integer, String>> map = Maps.newHashMap();
 	private Map<Integer, List<StringBuilder>> changeMap = Maps.newHashMap();
 	private Map<Integer, Integer> fibonacciMap = Maps.newHashMap();
+	private int minimumDistance = -1;
 	
 	public List<String> getLongestCommonSubSequence(final String str1, final String str2) {
 		final int [][] table;
@@ -213,6 +214,48 @@ public class DynamicProgrammingQuestions {
 			paths.add(new StringBuilder().append(path.toString() + changePaths.get(i).toString()));
 		}
 		return paths;
+	}
+	
+	public int getMinimumCostPathWithoutDP(final int arr[][], int destinationX, final int destinationY) {
+		final Pair<Integer, Integer> origin = new Pair<Integer, Integer>(0, 0);
+		getPathWithoutDP(origin, destinationX, destinationY, arr, arr[origin.getL()][origin.getR()]);
+		return minimumDistance;
+	}
+
+	private void getPathWithoutDP(final Pair<Integer, Integer> origin, int destinationX, int destinationY, final int arr[][], final int pathSum) {
+		for (Pair<Integer, Integer> child : getChildIndexes(origin, arr, destinationX, destinationY, pathSum)) {
+			getPathWithoutDP(child, destinationX, destinationY, arr, pathSum + arr[child.getL()][child.getR()]);
+		}
+	}
+
+	private List<Pair<Integer, Integer>> getChildIndexes(final Pair<Integer, Integer> pair, final int arr[][], int destinationX, int destinationY, final int pathSum) {
+		final List<Pair<Integer, Integer>> children = new ArrayList<Pair<Integer,Integer>>();
+		int currentX = pair.getL();
+		int currentY = pair.getR();
+		int sumOfPath = pathSum;
+		if (currentX != destinationX && currentY != destinationY) {
+			if (currentY < arr[0].length - 1) {
+				children.add(new Pair<Integer, Integer>(currentX, currentY + 1));
+			} 
+			if (currentX < arr.length - 1) {
+				children.add(new Pair<Integer, Integer>(currentX + 1, currentY));
+			}
+			if (currentX < arr.length - 1 && currentY < arr[0].length - 1) {
+				children.add(new Pair<Integer, Integer>(currentX + 1, currentY + 1));
+			}
+		} else {
+			sumOfPath = sumOfPath + arr[destinationX][destinationY];
+			updateMinimumDistance(sumOfPath);
+		}
+		return children;
+	}
+
+	private void updateMinimumDistance(final int sumOfPath) {
+		if (minimumDistance == -1) {
+			minimumDistance = sumOfPath;
+		} else if (minimumDistance > sumOfPath) {
+			minimumDistance = sumOfPath;
+		}
 	}
 
 	public Pair<Integer, String> getMinimumCostPath(final int arr[][], final int destinationX, final int destinationY) {
