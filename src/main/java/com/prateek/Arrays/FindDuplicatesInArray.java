@@ -9,8 +9,8 @@ import com.google.common.collect.Lists;
 public class FindDuplicatesInArray {
 	
 	public Set<Integer> findDuplicates(final int arr[]) {
-		final List<Integer> list = Lists.newArrayList(1, 2, 3, 4);
-		Integer ar[] = (Integer[])list.toArray();
+		//final List<Integer> list = Lists.newArrayList(1, 2, 3, 4);
+		//Integer ar[] = (Integer[])list.toArray();
 		return fetchDuplicates(arr);
 	}
 
