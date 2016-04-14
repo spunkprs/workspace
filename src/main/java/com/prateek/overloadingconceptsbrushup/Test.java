@@ -5,10 +5,10 @@ public class Test {
 	public static void main(String[] args) {
       TestOverloading testOverloading = new TestOverloading();
       
-      long l1 = 4;
-      long l2 = 3;
+      int l1 = 4;
+      int l2 = 3;
       testOverloading.overload(l1, l2);
-      testOverloading.overload(2.0f, 9.0f);
+      testOverloading.overload(2.0, 9.0);
       
 	}
 }
