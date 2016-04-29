@@ -5,6 +5,12 @@ public class StaticClassConcepts {
 	   
 	public static void main(String[] args) {
       System.out.println("Executing main method");
+      StaticClassConcepts obj = null;
+      obj.methodOne();
+	}
+	
+	public static void methodOne() {
+		System.out.println("Inside method one");
 	}
 
 }
