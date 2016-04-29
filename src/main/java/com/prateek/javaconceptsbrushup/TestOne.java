@@ -14,16 +14,19 @@ public class TestOne {
      String s6 = s1 + s5;
      String s7 = s1 + s2;
      String s8 = "ABC" + "DEF";
-     /*
-     String s9 = null;
-     String s10 = null + "llala";
+     String s11 = "ABC" + s2;
+     
+     Integer s9 = null;
+     String s10 = s9 + "llala";
      System.out.println(s9);
-     */
+     System.out.println(s10);
+     
      
      checkForEquality(s3, s4);
      checkForEquality(s4, s6);
      checkForEquality(s4, s7);
      checkForEquality(s4, s8);
+     checkForEquality(s4, s11);
 	}
 	
 	private static String getResult() {
