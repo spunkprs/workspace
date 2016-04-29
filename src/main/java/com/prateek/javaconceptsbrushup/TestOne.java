@@ -14,6 +14,11 @@ public class TestOne {
      String s6 = s1 + s5;
      String s7 = s1 + s2;
      String s8 = "ABC" + "DEF";
+     /*
+     String s9 = null;
+     String s10 = null + "llala";
+     System.out.println(s9);
+     */
      
      checkForEquality(s3, s4);
      checkForEquality(s4, s6);
