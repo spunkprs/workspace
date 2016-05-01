@@ -27,12 +27,12 @@ public class Processor {
 		for (String dataInfo : input) {
 			final String[] info = dataInfo.split(",");
 			final SoftwareInfo si = new SoftwareInfo(info[1].trim(), info[2].trim(), info[3].trim());
-			prepareMapOne(si);
-			prepareMapTwo(info[0], si);
+			prepareSoftwareKindToVersionMap(si);
+			prepareServerNameToInfoMap(info[0], si);
 		}
 	}
 	
-	private void prepareMapTwo(final String serverName, final SoftwareInfo si) {
+	private void prepareServerNameToInfoMap(final String serverName, final SoftwareInfo si) {
 		if (!serverNameToInfoMap.containsKey(serverName)) {
 			List<SoftwareInfo> softwareInfos = new ArrayList<SoftwareInfo>();
 			softwareInfos.add(si);
@@ -43,7 +43,7 @@ public class Processor {
 		}
 	}
 
-	private void prepareMapOne(final SoftwareInfo si) {
+	private void prepareSoftwareKindToVersionMap(final SoftwareInfo si) {
 		if (!softwareKindToVersionMap.containsKey(si)) {
 			softwareKindToVersionMap.put(si, si.getSoftwareVersion());
 		} else {
