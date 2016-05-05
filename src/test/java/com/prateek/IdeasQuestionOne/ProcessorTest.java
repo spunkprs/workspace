@@ -84,10 +84,11 @@ public class ProcessorTest {
 		final Map<SoftwareInfo, String> mapOne = processor.getSoftwareKindToVersionMap();
 		final Map<String, List<SoftwareInfo>> mapTwo = processor.getServerNameToInfoMap();
 		
-		Assert.assertEquals(2, mapOne.size());
+		Assert.assertEquals(3, mapOne.size());
 		Assert.assertEquals(3, mapTwo.size());
 		Assert.assertEquals("5.5", mapOne.get(softwareInfos.get(0)));
 		Assert.assertEquals("12.04", mapOne.get(softwareInfos.get(2)));
+		Assert.assertEquals("2.6.3", mapOne.get(softwareInfos.get(5)));
 		
 		verify(listOne, mapTwo.get(SERVER_ONE));
 		verify(listTwo, mapTwo.get(SERVER_TWO));
@@ -100,6 +101,8 @@ public class ProcessorTest {
 		input.add("Server2, Database, MySQL, 5.1");
 		input.add("Server3, OS, Ubuntu, 10.04");
 		input.add("Server1, OS, Ubuntu, 12.04");
+		input.add("Server2, OS, Ubuntu, 12.04");
+		input.add("Server3, Language, Python, 2.6.3");
 		return input;
 	}
 
@@ -110,11 +113,15 @@ public class ProcessorTest {
 		final SoftwareInfo siTwo = new SoftwareInfo("Database", "MySQL", "5.1");
 		final SoftwareInfo siThree = new SoftwareInfo("OS", "Ubuntu", "10.04");
 		final SoftwareInfo siFour = new SoftwareInfo("OS", "Ubuntu", "12.04");
+		final SoftwareInfo siFive = new SoftwareInfo("OS", "Ubuntu", "12.04");
+		final SoftwareInfo siSix = new SoftwareInfo("Language", "Python", "2.6.3");
 		
 		softwareInfos.add(siOne);
 		softwareInfos.add(siTwo);
 		softwareInfos.add(siThree);
 		softwareInfos.add(siFour);
+		softwareInfos.add(siFive);
+		softwareInfos.add(siSix);
 		
 		return softwareInfos;
 	}

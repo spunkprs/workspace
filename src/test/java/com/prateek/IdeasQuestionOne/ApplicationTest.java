@@ -43,7 +43,7 @@ public class ApplicationTest {
 	}
 
 	private void verify(final List<String> expectedOutput) throws IOException {
-		final List<String> actualOutput = readDataFromFile();
+		final List<String> actualOutput = readDataFromOutputFile();
 		
 		Assert.assertEquals(expectedOutput.size(), actualOutput.size());
 		for (String serverName : expectedOutput) {
@@ -51,7 +51,7 @@ public class ApplicationTest {
 		}
 	}
 
-	private List<String> readDataFromFile() throws IOException {
+	private List<String> readDataFromOutputFile() throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(OUTPUT_FILE));
 		final List<String> output = new ArrayList<String>();
 		
