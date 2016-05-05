@@ -19,7 +19,67 @@ public class DynamicProgrammingQuestions {
 	private Map<Integer, List<StringBuilder>> changeMap = Maps.newHashMap();
 	private Map<Integer, Integer> fibonacciMap = Maps.newHashMap();
 	private int minimumDistance = -1;
+	private Map<Integer, List<Integer>> lisMap = new HashMap<Integer, List<Integer>>();
+	private List<Integer> longestIncreasingSubsequence = Lists.newArrayList();
 	
+	public List<Integer> getLongestIncreasingSubSequence(final int arr[]) {
+		prepareLongestIncreasingSubsequence(arr, 0);
+		return longestIncreasingSubsequence;
+	}
+	
+	private void prepareLongestIncreasingSubsequence(final int[] arr, int currentIndex) {
+				if (!lisMap.containsKey(arr[currentIndex])) {
+					final List<Integer> childIndexes = getChildrenIndexes(currentIndex, arr);
+					for (int childIndex : childIndexes) {
+						prepareLongestIncreasingSubsequence(arr, childIndex);
+						final List<Integer> list = lisMap.get(arr[childIndex]);
+						lisMap.put(arr[currentIndex], prepareListForParent(list, arr[currentIndex]));
+						computeLongestIncreasingSubSequence(lisMap.get(arr[currentIndex]));
+					}
+					if (childIndexes.isEmpty()) {
+						List<Integer> list = Lists.newArrayList(arr[currentIndex]);
+						lisMap.put(arr[currentIndex], list);
+						computeLongestIncreasingSubSequence(list);
+					}
+				} 
+	}
+
+	private void computeLongestIncreasingSubSequence(final List<Integer> sequence) {
+		if (sequence.size() > longestIncreasingSubsequence.size()) {
+			longestIncreasingSubsequence = sequence;
+		}
+	}
+
+	private List<Integer> prepareListForParent(final List<Integer> list, final int parentElement) {
+		List<Integer> lisForParent = null;
+		if (!lisMap.containsKey(parentElement)) {
+			lisForParent = createLISForParent(lisForParent, list, parentElement);
+		} else {
+			final List<Integer> existingLISForParent = lisMap.get(parentElement);
+			if (existingLISForParent.size() - 1 < list.size()) {
+				lisForParent = createLISForParent(existingLISForParent, list, parentElement);
+			}
+			lisForParent = existingLISForParent;
+		}
+		return lisForParent;
+	}
+	
+	private List<Integer> createLISForParent(List<Integer> lisForParent, List<Integer> list, int parentElement) {
+		lisForParent = Lists.newArrayList(list);
+		lisForParent.add(parentElement);
+		return lisForParent;
+	}
+
+	private List<Integer> getChildrenIndexes(final int currentIndex, final int[] arr) {
+		final List<Integer> children = new ArrayList<Integer>();
+		for (int i = currentIndex + 1; i < arr.length; i++) {
+			if (arr[currentIndex] <= arr[i]) {
+				children.add(i);
+			}
+		}
+		return children;
+	}
+
 	public List<String> getLongestCommonSubSequence(final String str1, final String str2) {
 		final int [][] table;
 		List<Pair<Integer, Integer>> positions = Lists.newArrayList();

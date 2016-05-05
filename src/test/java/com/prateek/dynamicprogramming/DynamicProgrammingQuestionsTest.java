@@ -138,6 +138,38 @@ public class DynamicProgrammingQuestionsTest {
 		verifyCommonSubStringsOrSubSequences(expectedCommonSubSequences, actualCommonSubSequences);
 	}
 	
+	@Test
+	public void shouldReturnLongestIncreasingSubSequenceCaseOne() {
+		final int arr[] = {10, 22, 9, 33, 21};
+		final List<Integer> expectedLongestIncreasingSubSequence= Lists.newArrayList(10, 22, 33);
+		
+		verifyLIS(expectedLongestIncreasingSubSequence, prepareLongestIncreasingSubSequence(unit.getLongestIncreasingSubSequence(arr)));
+	}
+	
+	@Test
+	public void shouldReturnLongestIncreasingSubSequenceCaseTwo() {
+		final int arr[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
+		final List<Integer> expectedLongestIncreasingSubSequence= Lists.newArrayList(10, 22, 33, 50, 60, 80);
+		
+		verifyLIS(expectedLongestIncreasingSubSequence, prepareLongestIncreasingSubSequence(unit.getLongestIncreasingSubSequence(arr)));
+	}
+
+
+	private void verifyLIS(final List<Integer> expectedLongestIncreasingSubSequence, final List<Integer> longestIncreasingSubSequence) {
+		Assert.assertEquals(expectedLongestIncreasingSubSequence.size(), longestIncreasingSubSequence.size());
+		for (int i = 0; i < expectedLongestIncreasingSubSequence.size(); i++) {
+			Assert.assertEquals(expectedLongestIncreasingSubSequence.get(i), longestIncreasingSubSequence.get(i));
+		}
+	}
+
+	private List<Integer> prepareLongestIncreasingSubSequence(final List<Integer> actualReversedLongestIncreasingSubSequence) {
+		List<Integer> longestIncreasingSubSequence = Lists.newArrayList();
+		
+		for (int i = actualReversedLongestIncreasingSubSequence.size() - 1; i >= 0; i--) {
+			longestIncreasingSubSequence.add(actualReversedLongestIncreasingSubSequence.get(i));
+		}
+		return longestIncreasingSubSequence;
+	}
 
 	private void verifyCommonSubStringsOrSubSequences(final List<String> expectedCommonSubStrings, final List<String> actualCommonSubStrings) {
 		for (int i = 0; i < expectedCommonSubStrings.size(); i++) {
