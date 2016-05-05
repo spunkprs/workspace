@@ -153,6 +153,22 @@ public class DynamicProgrammingQuestionsTest {
 		
 		verifyLIS(expectedLongestIncreasingSubSequence, prepareLongestIncreasingSubSequence(unit.getLongestIncreasingSubSequence(arr)));
 	}
+	
+	@Test
+	public void shouldReturnLongestIncreasingSubSequenceWhenProvidedArrayIsSortedInMixedOrder() {
+		final int arr[] = {30, 20, 25};
+		final List<Integer> expectedLongestIncreasingSubSequence= Lists.newArrayList(20, 25);
+		
+		verifyLIS(expectedLongestIncreasingSubSequence, prepareLongestIncreasingSubSequence(unit.getLongestIncreasingSubSequence(arr)));
+	}
+	
+	@Test
+	public void shouldReturnLongestIncreasingSubSequenceWhenProvidedArrayIsSortedInDescendingOrder() {
+		final int arr[] = {30, 20, 10};
+		final List<Integer> expectedLongestIncreasingSubSequence= Lists.newArrayList(30);
+		
+		verifyLIS(expectedLongestIncreasingSubSequence, prepareLongestIncreasingSubSequence(unit.getLongestIncreasingSubSequence(arr)));
+	}
 
 
 	private void verifyLIS(final List<Integer> expectedLongestIncreasingSubSequence, final List<Integer> longestIncreasingSubSequence) {

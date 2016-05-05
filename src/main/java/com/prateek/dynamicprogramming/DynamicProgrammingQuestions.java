@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.openpojo.business.BusinessIdentity;
 import com.openpojo.business.annotation.BusinessKey;
 
@@ -28,20 +30,23 @@ public class DynamicProgrammingQuestions {
 	}
 	
 	private void prepareLongestIncreasingSubsequence(final int[] arr, int currentIndex) {
-				if (!lisMap.containsKey(arr[currentIndex])) {
-					final List<Integer> childIndexes = getChildrenIndexes(currentIndex, arr);
-					for (int childIndex : childIndexes) {
-						prepareLongestIncreasingSubsequence(arr, childIndex);
-						final List<Integer> list = lisMap.get(arr[childIndex]);
-						lisMap.put(arr[currentIndex], prepareListForParent(list, arr[currentIndex]));
-						computeLongestIncreasingSubSequence(lisMap.get(arr[currentIndex]));
-					}
-					if (childIndexes.isEmpty()) {
-						List<Integer> list = Lists.newArrayList(arr[currentIndex]);
-						lisMap.put(arr[currentIndex], list);
-						computeLongestIncreasingSubSequence(list);
-					}
-				} 
+		for (int i = currentIndex; i < arr.length; i++) {
+			if (!lisMap.containsKey(i)) {
+				final List<Integer> childIndexes = getChildrenIndexes(i, arr);
+				for (int childIndex : childIndexes) {
+					prepareLongestIncreasingSubsequence(arr, childIndex);
+					final List<Integer> list = lisMap.get(childIndex);
+					lisMap.put(i, prepareListForParent(list, i, arr));
+					computeLongestIncreasingSubSequence(lisMap.get(i));
+				}
+				if (childIndexes.isEmpty()) {
+					List<Integer> list = Lists.newArrayList(arr[i]);
+					lisMap.put(i, list);
+					computeLongestIncreasingSubSequence(list);
+				}
+			} 
+		}
+				
 	}
 
 	private void computeLongestIncreasingSubSequence(final List<Integer> sequence) {
@@ -50,14 +55,14 @@ public class DynamicProgrammingQuestions {
 		}
 	}
 
-	private List<Integer> prepareListForParent(final List<Integer> list, final int parentElement) {
+	private List<Integer> prepareListForParent(final List<Integer> list, final int parentIndex, final int arr[]) {
 		List<Integer> lisForParent = null;
-		if (!lisMap.containsKey(parentElement)) {
-			lisForParent = createLISForParent(lisForParent, list, parentElement);
+		if (!lisMap.containsKey(parentIndex)) {
+			lisForParent = createLISForParent(lisForParent, list, arr[parentIndex]);
 		} else {
-			final List<Integer> existingLISForParent = lisMap.get(parentElement);
+			final List<Integer> existingLISForParent = lisMap.get(parentIndex);
 			if (existingLISForParent.size() - 1 < list.size()) {
-				lisForParent = createLISForParent(existingLISForParent, list, parentElement);
+				lisForParent = createLISForParent(existingLISForParent, list, arr[parentIndex]);
 			}
 			lisForParent = existingLISForParent;
 		}
