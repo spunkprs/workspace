@@ -6,7 +6,8 @@ No invalid statement shall be provided in the following sections:-
 Invalid statement can be provided here :-
 1. Credits of invalid element could be asked.
 2. Invalid words that are not mapped to any of Roman Character could be used here.
-3. Every asked query would start with following :-
+3. Words mapped to Roman characters can be in format that does not abide with the rules.
+4. Every asked query would start with following :-
 
 1.how much 
 2.how much is 

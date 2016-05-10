@@ -1,6 +1,6 @@
 package com.prateek.citipreparation;
 
-public class Parent {
+public class Parent extends GrandParent {
 
 	protected Parent() {
 		System.out.println("Parent Initialized");

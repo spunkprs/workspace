@@ -1,8 +1,7 @@
-1.Processor.java is the main file from where execution starts.
-2. Need to trigger ProcessorTest.java to execute the program.
+1.Executor.java is the main file from where execution starts.
+2. Need to trigger IntegrationTest.java to execute the program.
 3. The code will be reading input from InputFile.txt and writing the output to GeneratedOutput.txt, have mentioned about the assumptions I have made in
 Assumptions.txt file.
 4.Some of the unit tests are more than unit tests as they verify the output after reading the data written in to output file(GeneratedOutput.txt), have verified in 
 this manner because no where in the instructions in the question mentioned about using Mockito framework.
-5. ProcessorTest.java have no verification part as its components have been tested thoroughly.
-6.GeneratedOutput.txt currently contains output to the queries present in InputFile.txt.
+5.GeneratedOutput.txt currently contains output to the queries present in InputFile.txt.

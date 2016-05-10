@@ -20,7 +20,6 @@ public class Test {
 	}
 }
 
-
 class OuterClass {
 	
 	private String outerClassMessage;

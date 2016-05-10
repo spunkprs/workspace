@@ -14,7 +14,5 @@ public class Child extends com.prateek.citipreparation.Parent {
 
 	public static void main(final String ar[]) {
 		Parent p = new Child();
-		//p.print();
-		//p.add(1, 2);
 	}
 }

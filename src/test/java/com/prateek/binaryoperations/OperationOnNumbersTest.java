@@ -82,7 +82,7 @@ public class OperationOnNumbersTest {
 	}
 	
 	@Test
-	public void shouldGetTwoNumbersInArrayWhereAllNumbersAreRepeatedEvenNumberOfTimesExceptThoseTwoNumbersWhichRepeatsOddNumberOfTimes() {
+	public void shouldGetTwoNumbersInArrayWhereAllNumbersAreRepeatedEvenNumberOfTimesExceptThoseTwoNumbersWhichRepeatsOddNumberOfTimesCaseOne() {
 		//Set 
 		final int array[] = {2, 7, 2, 3, 4, 5, 4, 9, 9, 7}; 
 		final List<Integer> expectedList = new ArrayList<Integer>();
@@ -92,6 +92,41 @@ public class OperationOnNumbersTest {
 		//Execute && Verify
 		final List<Integer> actualList = OperationsOnNumbersWithoutArithmeticOperators.getTwoNumbersWhichAreRepeatedOddNumberOfTimesWhileOtherAreRepeatedEvenNumberOfTimes(array);
 		Assert.assertEquals(expectedList.size(), actualList.size());
+		verifyListContents(expectedList, actualList);
+	}
+	
+	private void verifyListContents(final List<Integer> expectedList, final List<Integer> actualList) {
+		for (Integer element : expectedList) {
+			Assert.assertTrue(actualList.contains(element));
+		}
+	}
+
+	@Test
+	public void shouldGetTwoNumbersInArrayWhereAllNumbersAreRepeatedEvenNumberOfTimesExceptThoseTwoNumbersWhichRepeatsOddNumberOfTimesCaseTwo() {
+		//Set 
+		final int array[] = {2, 7, 2, 3, 4, 5, 3, 9, 9, 7}; 
+		final List<Integer> expectedList = new ArrayList<Integer>();
+		expectedList.add(5);
+		expectedList.add(4);
+		
+		//Execute && Verify
+		final List<Integer> actualList = OperationsOnNumbersWithoutArithmeticOperators.getTwoNumbersWhichAreRepeatedOddNumberOfTimesWhileOtherAreRepeatedEvenNumberOfTimes(array);
+		Assert.assertEquals(expectedList.size(), actualList.size());
+		verifyListContents(expectedList, actualList);
+	}
+	
+	@Test
+	public void shouldGetTwoNumbersInArrayWhereAllNumbersAreRepeatedEvenNumberOfTimesExceptThoseTwoNumbersWhichRepeatsOddNumberOfTimesCaseThree() {
+		//Set 
+		final int array[] = {4, 7, 2, 2, 7, 6}; 
+		final List<Integer> expectedList = new ArrayList<Integer>();
+		expectedList.add(4);
+		expectedList.add(6);
+		
+		//Execute && Verify
+		final List<Integer> actualList = OperationsOnNumbersWithoutArithmeticOperators.getTwoNumbersWhichAreRepeatedOddNumberOfTimesWhileOtherAreRepeatedEvenNumberOfTimes(array);
+		Assert.assertEquals(expectedList.size(), actualList.size());
+		verifyListContents(expectedList, actualList);
 	}
 	
 	@Test

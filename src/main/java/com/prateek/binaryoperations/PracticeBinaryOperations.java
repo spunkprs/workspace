@@ -7,11 +7,12 @@ public class PracticeBinaryOperations {
 		System.out.println(x);
 		System.out.println(~x);
 		//System.out.println(Math.pow(2, 33));
-		int numberOfBitsToBeShifted = 33;
-		int number = 5;
-		leftBitShift(number, numberOfBitsToBeShifted);
-		rightBitShiftWithSign(number, numberOfBitsToBeShifted);
-		rightBitShiftWithoutSign(number, numberOfBitsToBeShifted);
+		//int numberOfBitsToBeShifted = 33;
+		//int number = 5;
+		//leftBitShift(number, numberOfBitsToBeShifted);
+		//rightBitShiftWithSign(number, numberOfBitsToBeShifted);
+		//rightBitShiftWithoutSign(number, numberOfBitsToBeShifted);
+		doPrintBinary(7);
 	}
 
 	//left bit shift is equivalent to left operand * Math.pow(2, right operand)
@@ -31,5 +32,12 @@ public class PracticeBinaryOperations {
 		System.out.println("Number before right bit shift" +" "+ number);
 		number = number >>> numberOfBitsToBeShifted;
 		System.out.println("Number after right bit shift" +" "+ number);
+	}
+	
+	public static void doPrintBinary(int n) {
+        if (n > 1) {
+            doPrintBinary(n >> 1);
+        }
+        System.out.print(n & 1);
 	}
 }
