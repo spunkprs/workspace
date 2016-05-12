@@ -230,8 +230,27 @@ public int getMinimumStepsToReachDestination(final int num) {
 	return minimumNumberOfSteps;
 }
 
+/*This implementation assumes that array doesn't contains zeroes*/
+public int[] partitionArrayWithNegativesAndPositives(final int arr[]) {
+	partitionArrayWhenNoZeroesPresent(arr);
+	return arr;
+}
+
+private void partitionArrayWhenNoZeroesPresent(final int arr[]) {
+	int currentIndex = 0;
+	for(int i = 0; i < arr.length; i++) {
+		if (arr[i] < 0) {
+			if (i != currentIndex) {
+				swap(currentIndex, i, arr);
+				currentIndex++;
+			} else {
+				currentIndex++;
+			}
+		}
+	}
+}
+
 private void preparePathAndGetMinimumSteps(int num, int currentIndex, int step, String path) {
-	
 		if (Math.abs(currentIndex) == num) {
 			int minSteps = 0;
 			path = path + String.valueOf(step);

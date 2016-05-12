@@ -235,6 +235,31 @@ public class ArrayOperationsTest {
 		
 		Assert.assertEquals(5, unit.getMinimumStepsToReachDestination(numberToReach));
 	}
+	
+	@Test
+	public void shouldPartitionArrayWhenNoZeroesArePresentInArrayCaseOne() {
+		final int arr[] = {-1, 7, 9, -8, 4, -3};
+		
+		final int expectedArray[] = {-1, -8, -3, 7, 4, 9};
+		final int actualArray[] = unit.partitionArrayWithNegativesAndPositives(arr);
+		verifyArrayElements(expectedArray, actualArray);
+	}
+	
+	@Test
+	public void shouldPartitionArrayWhenNoZeroesArePresentInArrayCaseTwo() {
+		final int arr[] = {-1, 7, -9, -8, -4, -3};
+		
+		final int expectedArray[] = {-1, -9, -8, -4, -3, 7};
+		final int actualArray[] = unit.partitionArrayWithNegativesAndPositives(arr);
+		verifyArrayElements(expectedArray, actualArray);
+	}
+
+	private void verifyArrayElements(final int[] expectedArray, final int[] actualArray) {
+		Assert.assertEquals(expectedArray.length, actualArray.length);
+		for (int i = 0; i < expectedArray.length; i++) {
+			Assert.assertEquals(expectedArray[i], actualArray[i]);
+		}
+	}
 
 	private void verifySequences(final List<String> expectedSequence, final List<String> actualSequence) {
 		for (int i = 0; i < expectedSequence.size(); i++) {
