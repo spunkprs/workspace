@@ -21,7 +21,7 @@ public class PersistAndReadSerialClass {
 	
 	public static void main(String[] args) {
 
-		writeSerialObjectToFile();
+		//writeSerialObjectToFile();
 		readSerialObjectFromFile();
 		
 	}
@@ -35,6 +35,7 @@ public class PersistAndReadSerialClass {
 			in = new ObjectInputStream(fis);
 			serialObjectTwo = (SerialClass)in.readObject();
 			System.out.println("Serial Object Read From File");
+			//System.out.println(serialObjectTwo);
 			printDate(serialObjectOne, serialObjectTwo);
 			compareObjects(serialObjectOne, serialObjectTwo);
 			in.close();

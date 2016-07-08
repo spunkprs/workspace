@@ -19,6 +19,48 @@ public class ArrayOperationsTest {
 	}
 	
 	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsBothPositiveAndNegativeIntegers() {
+		final List<Integer> numbers = Lists.newArrayList(2, 3, -7, 6, 8, 1, -10, 15);
+		Assert.assertEquals(4, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsBothPositiveNegativeIntegersAndZero() {
+		final List<Integer> numbers = Lists.newArrayList(1, 1, 0, -1, -2);
+		Assert.assertEquals(2, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsOnlyNegativeIntegers() {
+		final List<Integer> numbers = Lists.newArrayList(-8, -7, -6);
+		Assert.assertEquals(1, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsOnlyPositiveIntegers() {
+		final List<Integer> numbers = Lists.newArrayList(605, 634, 0, 274);
+		Assert.assertEquals(1, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsFirstNNaturalNumbers() {
+		final List<Integer> numbers = Lists.newArrayList(1, 2, 3, 4, 5, 6);
+		Assert.assertEquals(7, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsSingleIntegerCaseOne() {
+		final List<Integer> numbers = Lists.newArrayList(2);
+		Assert.assertEquals(1, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
+	public void shouldReturnFirstMissingPositiveIntegerWhenArrayContainsSingleIntegerCaseTwo() {
+		final List<Integer> numbers = Lists.newArrayList(1);
+		Assert.assertEquals(2, unit.firstMissingPositiveInteger(numbers));
+	}
+	
+	@Test
 	public void shouldReturnCountOfInversionsCaseOne() {
 		//Set Up
 		int array [] = {2, 4, 1, 3, 5};
@@ -252,6 +294,15 @@ public class ArrayOperationsTest {
 		final int expectedArray[] = {-1, -9, -8, -4, -3, 7};
 		final int actualArray[] = unit.partitionArrayWithNegativesAndPositives(arr);
 		verifyArrayElements(expectedArray, actualArray);
+	}
+	
+	@Test
+	public void shouldPartitionArrayWhenZeroesAreAlsoPresentAlongWithPositivesAndNegatives() {
+		final int arr[] = {-7, 6, -6, -1, 0, 20, 0, 1};
+		
+		final int expectedArr[] = {-7, -6, -1, 0, 0, 20, 6, 1};
+		final int actualArr[] = unit.partitionArrayWithNegativesPositivesAndZeroes(arr);
+		verifyArrayElements(expectedArr, actualArr);
 	}
 
 	private void verifyArrayElements(final int[] expectedArray, final int[] actualArray) {

@@ -30,4 +30,9 @@ public class DecimalToBinaryConversionTest {
 	public void shouldConvertDecimalToBinaryWhenDecimalIs14() {
 		Assert.assertEquals("1110", DecimalToBinaryConversion.decimalToBinaryConversion(14));
 	}
+	
+	@Test
+	public void shouldConvertDecimalToBinaryWhenDecimalIs20() {
+		Assert.assertEquals("10100", DecimalToBinaryConversion.decimalToBinaryConversion(20));
+	}
 }

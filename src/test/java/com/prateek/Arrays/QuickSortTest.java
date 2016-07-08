@@ -26,6 +26,16 @@ public class QuickSortTest {
 	}
 	
 	@Test
+	public void shouldSortArrayInAscendingOrderCaseThree() {
+		int arr[] = {7, 6, -4, 3, -2, 1, 10};
+		
+		final int expectedArr[] = {-4, -2, 1, 3, 6, 7, 10};
+		final int actualSortedArr[] = QuickSort.sortInAscendingOrder(arr);
+		
+		verifyEquality(expectedArr, actualSortedArr);
+	}
+	
+	@Test
 	public void shouldSortArrayWhenArrayIsAlreadySortedInAscendingOrder() {
 		int arr[] = {1, 2, 3, 4, 5};
 		

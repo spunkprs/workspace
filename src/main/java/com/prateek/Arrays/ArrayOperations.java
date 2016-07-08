@@ -1,5 +1,6 @@
 package com.prateek.Arrays;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.sound.midi.Sequence;
@@ -236,7 +237,107 @@ public int[] partitionArrayWithNegativesAndPositives(final int arr[]) {
 	return arr;
 }
 
-private void partitionArrayWhenNoZeroesPresent(final int arr[]) {
+/*
+ * This implementation takes care of presence of zeroes as well.
+ * */
+public int[] partitionArrayWithNegativesPositivesAndZeroes(final int arr[]) {
+	int currentIndex = partitionArrayWhenNoZeroesPresent(arr);
+	partitionArrayWithZeroes(arr, currentIndex);
+	return arr;
+}
+
+public int firstMissingPositiveInteger(final List<Integer> numbers) {
+	if (parseToFindIfAllNegatives(numbers)) {
+		return 1;
+	} else if (numbers.size() == 1 && numbers.get(0) == 1) {
+		return 2;
+	}
+	else {
+		return processToFindFirstMissingPositiveInteger(numbers); 
+	}
+}
+
+private int processToFindFirstMissingPositiveInteger(final List<Integer> numbers) {
+	if (sumOfFirstNNaturalNumbers(numbers.size()) == calculateSumOfNumbers(numbers)) {
+		return numbers.size() + 1;
+	}
+	int index = partitionArrayInToNegativesAndPositives(numbers);
+	for (int i = index; i < numbers.size(); i++) {
+		if (Math.abs(numbers.get(i)) == 0 && index == 0) {
+			continue;
+		}
+		if (Math.abs(numbers.get(i)) < (numbers.size() - index) && numbers.get(Math.abs(numbers.get(i)) - 1 + index) > 0) {
+			numbers.set(Math.abs(numbers.get(i)) - 1 + index, numbers.get(Math.abs(numbers.get(i)) - 1 + index) * -1);
+		}
+	}
+	
+	//parse array to find first positive missing integer 
+	return parseArrayToFindFirstMissingPositiveInteger(numbers, index);
+}
+
+private int calculateSumOfNumbers(List<Integer> numbers) {
+	int sum = 0;
+	for (Integer number : numbers) {
+		sum += number;
+	}
+	return sum;
+}
+
+private int sumOfFirstNNaturalNumbers(final int n) {
+	return (n * (n + 1)) / 2;
+}
+
+private int parseArrayToFindFirstMissingPositiveInteger(final List<Integer> numbers, final int index) {
+	int firstMissingPositiveInteger = Integer.MIN_VALUE;
+	for (int i = index; i < numbers.size(); i++) {
+		if (numbers.get(i) > 0) {
+			firstMissingPositiveInteger = i + 1;
+			break;
+		}
+	}
+	return firstMissingPositiveInteger - index;
+}
+
+private int partitionArrayInToNegativesAndPositives(final List<Integer> numbers) {
+	int currentIndex = 0;
+	int parsingIndex = 0;
+	while (parsingIndex < numbers.size()) {
+		if (numbers.get(parsingIndex) < 0) {
+			Collections.swap(numbers, currentIndex, parsingIndex);
+			currentIndex++;
+			parsingIndex++;
+		} else {
+			parsingIndex++;
+		}
+	}
+	return currentIndex;
+}
+
+private boolean parseToFindIfAllNegatives(final List<Integer> numbers) {
+	int countOfNegatives = 0;
+	for (Integer number : numbers) {
+		if (number < 0) {
+			countOfNegatives++;
+		}
+	}
+	return countOfNegatives == numbers.size() ? true : false;
+}
+
+private void partitionArrayWithZeroes(int[] arr, int currentIndex) {
+	int startIndex = currentIndex;
+	for (int i = currentIndex; i < arr.length; i++) {
+		if (arr[i] == 0) {
+			if (startIndex != i) {
+				swap(startIndex, i, arr);
+				startIndex++;
+			} else {
+				startIndex++;
+			}
+		}
+	}
+}
+
+private int partitionArrayWhenNoZeroesPresent(final int arr[]) {
 	int currentIndex = 0;
 	for(int i = 0; i < arr.length; i++) {
 		if (arr[i] < 0) {
@@ -248,6 +349,7 @@ private void partitionArrayWhenNoZeroesPresent(final int arr[]) {
 			}
 		}
 	}
+	return currentIndex;
 }
 
 private void preparePathAndGetMinimumSteps(int num, int currentIndex, int step, String path) {

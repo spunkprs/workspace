@@ -32,10 +32,32 @@ public class BinarySearchTreeTest {
 		elements.add(6);
 		elements.add(5);
 		elements.add(7);
-		
 		elements.add(110);
 	}
 	
+	@Test
+	public void shouldGetParentForNonRootNodeCaseOne() {
+		insertElementsInBST();
+		Assert.assertEquals(12, unit.fetchParent(16).getElement());
+	}
+	
+	@Test
+	public void shouldGetParentForNonRootNodeCaseTwo() {
+		insertElementsInBST();
+		Assert.assertEquals(8, unit.fetchParent(9).getElement());
+	}
+	
+	@Test
+	public void shouldGetParentForNonRootNodeCaseThree() {
+		insertElementsInBST();
+		Assert.assertEquals(10, unit.fetchParent(12).getElement());
+	}
+	
+	@Test
+	public void shouldGetParentAsNullForRootNode() {
+		insertElementsInBST();
+		Assert.assertNull(unit.fetchParent(10));
+	}
 	
 	@Test
 	public void shouldPerformBoundaryTraversal() {
@@ -528,6 +550,71 @@ public class BinarySearchTreeTest {
 		final int expectedLeastCommonAncestor = 20;
 		final int leastCommonAncestor = unit.getLeastCommonAncestor(elementOne, elementTwo);
 		Assert.assertEquals(expectedLeastCommonAncestor, leastCommonAncestor);
+	}
+	
+	@Test
+	public void shouldFetchHeightOfNodeWhenNodeIsPresentInTheTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertEquals(2, unit.getHeightOfNode(45));
+	}
+	
+	@Test
+	public void shouldFetchHeightOfNodeWhenNodeIsRootOfTheTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertEquals(0, unit.getHeightOfNode(35));
+	}
+	
+	@Test
+	public void shouldFetchHeightOfNodeWhenNodeIsLeafInTheTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertEquals(3, unit.getHeightOfNode(100));
+	}
+	
+	@Test
+	public void shouldFetchHeightOfNodeWhenNodeIsNotPresentInTheTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertEquals(-1, unit.getHeightOfNode(102));
+	}
+	
+	@Test
+	public void shouldConfirmTwoPresentNodesAreCousinsOrNotCaseOne() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertFalse(unit.areTwoNodesCousins(10, 30));
+	}
+	
+	@Test
+	public void shouldConfirmTwoPresentNodesAreCousinsOrNotCaseTwo() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertTrue(unit.areTwoNodesCousins(10, 45));
+	}
+	
+	@Test
+	public void shouldConfirmTwoNodesAreCousinsOrNotWhenOneIsPresentInTreeAndOtherNot() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertFalse(unit.areTwoNodesCousins(10, 105));
+	}
+	
+	
+	@Test
+	public void shouldConfirmTwoNodesAreCousinsOrNotWhenBothNodesAreAbsentFromTree() {
+		elements = Lists.newArrayList(35, 20, 55, 10, 30, 45, 60, 100, 33);
+		insertElementsInBST();
+		
+		Assert.assertFalse(unit.areTwoNodesCousins(1, 105));
 	}
 	
 	private void verifyElements(final List<Integer> expectedListOfAncestors, final List<Integer> actualListOfAncestors) {

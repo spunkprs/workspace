@@ -156,6 +156,43 @@ public class LinkedListTest {
 		final Node head = null;
 		Assert.assertEquals(0, unit.getLengthOfLinkList(head));
 	}
+	
+	@Test
+	public void shouldReverseAlternativeThreeNodes() {
+		int limit = 10;
+		final Node head = new Node(1);
+		createLinkedList(head, limit);
+		
+		final String expectedResult = "32145698710";
+		
+		final Node node = unit.reverseAlternativeKNodes(head, 3);
+		
+		final String actualResult = createDataPatternFromListNodes(node);
+		Assert.assertTrue(expectedResult.equals(actualResult));
+	}
+	
+	private String createDataPatternFromListNodes(final Node node) {
+		Node n = node;
+		String s = "";
+		while(n != null) {
+			s+= n.getValue();
+			n = n.getNext();
+		}
+		return s;
+	}
+
+	@Test
+	public void shouldReverseLinkedList() {
+		int limit = 5;
+		final Node head = new Node(1);
+		createLinkedList(head, limit);
+		
+		final Node headOne = new Node(limit);
+		createReverseLinkedList(headOne, 1);
+		
+		final Node reversedNode = unit.reverseLinkListRecursiveApproachTwo(head);
+		verify(headOne, reversedNode);
+	}
 
 	private void verify(final Node nodeOne, final Node nodeTwo) {
 		Node headOne = nodeOne;

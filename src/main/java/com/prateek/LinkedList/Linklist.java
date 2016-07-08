@@ -13,6 +13,8 @@ public class Linklist {
 	private int counter = 0;
 	private List<Node> currentList = Lists.newArrayList();
 	private List<Node> previousList = Lists.newArrayList();
+	private List<Node> heads = Lists.newArrayList();
+	private Node nonReversalNodeTail = null;
 
 	public Node reverseLinkListRecursiveApproach(final Node node) {
 		if (node.getNext() != null) {
@@ -22,6 +24,79 @@ public class Linklist {
 		return node;
 	}
 	
+	public Node reverseAlternativeKNodes(Node node, int k) {
+		head = node;
+		final int lengthOfList = getLengthOfLinkList(node);
+		int counter = 1;
+		for (int i = 1; i <= lengthOfList; i+=k) {
+			if (counter % 2 != 0) {
+				final Node tail = getNodeAfterKNodes(node, k);
+				final Node nodeAfterTail = tail.getNext();
+				reverseList(node, tail);
+				headOne.setNext(nodeAfterTail);
+				if (nonReversalNodeTail != null) {
+					nonReversalNodeTail.setNext(head);
+				}
+			} else {
+				nonReversalNodeTail = skipKNodesForReversal(headOne.getNext(), k);
+				if (nonReversalNodeTail == null) {
+					break;
+				} else {
+					node = nonReversalNodeTail.getNext();
+				}
+			}
+			counter++;
+		}
+		return heads.get(0);
+	}
+	
+	private Node skipKNodesForReversal(final Node node, final int k) {
+			return getNodeAfterKNodes(node, k);
+	}
+
+	private void reverseList(final Node node, final Node tail) {
+		Node n = node;
+		if (n != tail) {
+			reverseList(n.getNext(), tail);
+			headOne.setNext(n);
+			headOne = headOne.getNext();
+		} else {
+			head = tail;
+			headOne = tail;
+			heads.add(head);
+		}
+	}
+
+	private Node getNodeAfterKNodes(final Node node, final int k) {
+		int counter = 1;
+		Node n = node;
+		while(counter < k && n != null) {
+			n = n.getNext();
+			counter++;
+		}
+		return n;
+	}
+
+	public Node reverseLinkListRecursiveApproachTwo(final Node node) {
+		reverseList(node);
+		headOne.setNext(null);
+		return head;
+	}
+	
+	private void reverseList(final Node node) {
+		if (node != null) {
+			reverseList(node.getNext());
+			if (node.getNext() == null) {
+				head = node;
+				headOne = node;
+			} else {
+				final Node n = headOne;
+				n.setNext(node);
+				headOne = headOne.getNext();
+			}
+		}
+	}
+
 	public int getLengthOfLinkList(final Node node) {
 		if (node == null) {
 			return 0;

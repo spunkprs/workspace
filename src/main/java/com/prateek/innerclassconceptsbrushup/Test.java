@@ -4,6 +4,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		
+	 //System.out.println(1/10);
      OuterClass.StaticInnerClass staticInnerClass = new OuterClass.StaticInnerClass("staticInnerClassMessage");
      OuterClass outerClass = new OuterClass("outerClassMessage");
      OuterClass.InnerClass innerClass = outerClass.new InnerClass("innerClassMessage");

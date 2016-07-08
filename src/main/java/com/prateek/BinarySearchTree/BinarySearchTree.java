@@ -19,6 +19,8 @@ public class BinarySearchTree {
 	private boolean leftElementPresent = false;
 	private Node lcaForNodes = null;
 	private String postOrderTraversal = "";
+	private int heightOfNode = -1;
+	private boolean isHeightProcessed = false;
 	
 	protected String levelOrderTraversalInSpiralForm() {
 		final StringBuilder sb = new StringBuilder();
@@ -28,6 +30,72 @@ public class BinarySearchTree {
 		Stack stackTwo = new Stack();
 		performOperationsOnStacks(stackOne, stackTwo, sb);
 		return sb.toString();
+	}
+	
+	protected boolean areTwoNodesCousins(final int nodeElementOne, final int nodeElementTwo) {
+		int heightOfElementOne = getHeightOfNode(nodeElementOne);
+		int heightOfElementTwo = getHeightOfNode(nodeElementTwo);
+		
+		Node parentOfElementOne = fetchParent(nodeElementOne);
+		Node parentOfElementTwo = fetchParent(nodeElementTwo);
+		
+		if (heightOfElementOne != -1 && heightOfElementTwo != -1 && parentOfElementOne != null && parentOfElementTwo != null) {
+			if (heightOfElementOne == heightOfElementTwo && parentOfElementOne.getElement() != parentOfElementTwo.getElement()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected int getHeightOfNode(final int nodeElement) {
+		processToFetchHeight(nodeElement, root, 0);
+		return heightOfNode;
+	}
+	
+	private void processToFetchHeight(final int nodeElement, final Node node, final int height) {
+		if (node.getElement() == nodeElement) {
+			heightOfNode = height;
+			isHeightProcessed = true;
+		} else {
+			if (node.getLeft() != null && !isHeightProcessed) {
+				processToFetchHeight(nodeElement, node.getLeft(), height + 1);
+			}
+			if (node.getRight() != null && !isHeightProcessed) {
+				processToFetchHeight(nodeElement, node.getRight(), height + 1);
+			}
+		}
+	}
+
+	protected Node fetchParent(final int nodeElement) {
+		if (nodeElement == root.getElement()) {
+			return null;
+		} else {
+			processToFetchParent(nodeElement, root);
+		}
+		return parent;
+	}
+	
+	private void processToFetchParent(final int nodeElement, final Node node) {
+		if (nodeElement != node.getElement()) {
+			if (node.getLeft() != null) {
+				processToFetchParent(nodeElement, node.getLeft());
+				if (flag) {
+					parent = node;
+					flag = false;
+					return;
+				}
+			}
+			if (node.getRight() != null) {
+				processToFetchParent(nodeElement, node.getRight());
+				if (flag) {
+					parent = node;
+					flag = false;
+					return;
+				}
+			}
+		} else {
+			flag = true;
+		}
 	}
 	
 	protected int getLeastCommonAncestor(final int nodeElementOne, final int nodeElementTwo) {
